@@ -13,6 +13,9 @@ public class Movement : MonoBehaviour
     public GameObject bullet;
     public GameObject newBullet;
 
+    public GameObject option1;
+    public GameObject option2;
+
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
@@ -28,13 +31,19 @@ public class Movement : MonoBehaviour
         //note for myself, have a small firing cooldown and make the space press work every frame
         forwardInput = Input.GetAxis("Vertical");
         turnInput = Input.GetAxis("Horizontal");
-        if (Input.GetKey("space") && fireCooldown <= 0)
+        if (Input.GetKey("z") && fireCooldown <= 0)
         {
             //spawn and move bullet;
-            fireCooldown = 0.2f;
+            fireCooldown = 0.1f;
             newBullet = Instantiate(bullet, transform.position, transform.rotation);
             newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
-           
+            //do the same on the options
+            newBullet = Instantiate(bullet, option1.transform.position, option1.transform.rotation);
+            newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
+            newBullet = Instantiate(bullet, option2.transform.position, option2.transform.rotation);
+            newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
+
+
         }
 
         //firing cooldown
@@ -66,7 +75,7 @@ public class Movement : MonoBehaviour
         }
 
         else
-        {
+        { 
             Debug.Log("lose!!!");
         }
     }
