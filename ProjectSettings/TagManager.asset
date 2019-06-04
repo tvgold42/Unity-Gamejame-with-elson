@@ -4,7 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - BadGuy
+  - bound
+  - friendlyBullet
+  - enemy1hp
+  - enemy2hp
+  - enemy3hp
   layers:
   - Default
   - TransparentFX
