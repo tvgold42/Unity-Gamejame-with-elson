@@ -125,7 +125,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPos: {fileID: 6491924667419618057, guid: c8b6f0a0d91d8bc4f800d2a749fb3e83,
     type: 3}
+  enemyTransform: {fileID: 0}
   enemyRB: {fileID: 0}
+  fullScale: {x: 0, y: 0, z: 0}
+  enemyRender: {fileID: 0}
+  enemyHealth: 2
+  enemyColorChange: 0
+  killed: 0
   enemy2HP: {fileID: 0}
   enemy1HP: {fileID: 0}
   newEnemy: {fileID: 0}

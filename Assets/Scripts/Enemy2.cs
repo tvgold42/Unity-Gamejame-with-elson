@@ -11,7 +11,7 @@ public class Enemy2 : MonoBehaviour
     public Vector3 fullScale;
     public SpriteRenderer enemyRender;
     public float shootCooldown = 5f;
-    public float enemyHealth = 8;
+    public float enemyHealth;
     public float enemyColorChange;
     public bool active = false;
     public bool killed;

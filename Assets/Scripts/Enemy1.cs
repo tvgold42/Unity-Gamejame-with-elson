@@ -9,7 +9,7 @@ public class Enemy1 : MonoBehaviour
     public Rigidbody enemyRB;
     public Vector3 fullScale;
     public SpriteRenderer enemyRender;
-    public float enemyHealth = 4;
+    public float enemyHealth;
     public float enemyColorChange;
     public static bool active = false;
     public bool killed;
