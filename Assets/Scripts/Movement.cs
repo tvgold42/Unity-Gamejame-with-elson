@@ -13,6 +13,8 @@ public class Movement : MonoBehaviour
     public GameObject bullet;
     public GameObject newBullet;
 
+
+    //Option 1 and 2 are currently just used 
     public GameObject option1;
     public GameObject option2;
 
@@ -31,7 +33,7 @@ public class Movement : MonoBehaviour
         //note for myself, have a small firing cooldown and make the space press work every frame
         forwardInput = Input.GetAxis("Vertical");
         turnInput = Input.GetAxis("Horizontal");
-        if (Input.GetKey("z") && fireCooldown <= 0)
+        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space)) && fireCooldown <= 0)
         {
             //spawn and move bullet;
             fireCooldown = 0.1f;
@@ -60,8 +62,8 @@ public class Movement : MonoBehaviour
         playerRB.AddTorque(0, turnInput * 4, 0);
 
         //locks the x and z rotation as well as y position
-        transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, 0);
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        //transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, 0);
+        //transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         
     }
 
