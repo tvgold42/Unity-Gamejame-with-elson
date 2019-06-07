@@ -5,11 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - bound
-  - friendlyBullet
-  - enemy1hp
-  - enemy2hp
-  - enemy3hp
-  - enemyshoot
+  - enemy
+  - blackBullet
+  - whiteBullet
   layers:
   - Default
   - TransparentFX

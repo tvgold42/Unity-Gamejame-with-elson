@@ -18,6 +18,8 @@ public class EnemyCounter : MonoBehaviour
     public bool waveComplete = false;
 
     //all enemy types
+    public GameObject whiteEnemy1;
+    public GameObject blackEnemy1;
     public GameObject enemy3HP;
     public GameObject enemy2HP;
     public GameObject enemy1HP;
@@ -52,7 +54,11 @@ public class EnemyCounter : MonoBehaviour
                 if (Random.Range(0, 100) >= 30)
                 { Instantiate(enemy2HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
                 if (Random.Range(0, 100) >= 80)
-               { Instantiate(enemyShoot, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
+                { Instantiate(enemyShoot, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
+                if (Random.Range(0, 100) >= 60)
+                { Instantiate(whiteEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
+                if (Random.Range(0, 100) >= 60)
+                { Instantiate(blackEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
                 else { Instantiate(enemy1HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
             }
         }

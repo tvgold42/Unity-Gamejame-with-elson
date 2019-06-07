@@ -136,6 +136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101541701}
   - component: {fileID: 101541702}
+  - component: {fileID: 101541703}
   m_Layer: 0
   m_Name: Option1
   m_TagString: Untagged
@@ -205,6 +206,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &101541703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101541700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3ce15b0731b2054d856618db0f89932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionSprite: {fileID: 0}
+  white: {fileID: 21300000, guid: 43a5145efa6798e43a6477c962d80dc1, type: 3}
+  black: {fileID: 21300000, guid: 6e52c161df9014444a735a74a89ea365, type: 3}
+  player: {fileID: 513496358}
+--- !u!1 &513496358 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6491924667419618060, guid: c8b6f0a0d91d8bc4f800d2a749fb3e83,
+    type: 3}
+  m_PrefabInstance: {fileID: 6491924667369945389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,6 +1233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1923352726}
   - component: {fileID: 1923352727}
+  - component: {fileID: 1923352728}
   m_Layer: 0
   m_Name: Option2
   m_TagString: Untagged
@@ -1279,6 +1303,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1923352728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923352725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3ce15b0731b2054d856618db0f89932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionSprite: {fileID: 0}
+  white: {fileID: 21300000, guid: 43a5145efa6798e43a6477c962d80dc1, type: 3}
+  black: {fileID: 21300000, guid: 6e52c161df9014444a735a74a89ea365, type: 3}
+  player: {fileID: 513496358}
 --- !u!1 &2075096556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,6 +1355,10 @@ MonoBehaviour:
   timeBetweenSpawn: 0
   timeBetweenWaves: 0
   waveComplete: 0
+  whiteEnemy1: {fileID: 7057169620007405925, guid: e2b5fa8ad62358e4d948ae127f4ec713,
+    type: 3}
+  blackEnemy1: {fileID: 7057169620007405925, guid: bc40209c4d204ef4dbe7052df196dfa8,
+    type: 3}
   enemy3HP: {fileID: 7057169620007405925, guid: 45385f502484d7749b4963eaf5aaf619,
     type: 3}
   enemy2HP: {fileID: 2818802747742057710, guid: 0f354f3dbbe21454fb1e02bd0a2ce280,
@@ -1414,10 +1458,27 @@ PrefabInstance:
       propertyPath: option2
       value: 
       objectReference: {fileID: 1923352725}
+    - target: {fileID: 6491924667419618059, guid: c8b6f0a0d91d8bc4f800d2a749fb3e83,
+        type: 3}
+      propertyPath: blackBullet
+      value: 
+      objectReference: {fileID: 528125888032967929, guid: c940fd324951c5647989d4fbb5dbd61f,
+        type: 3}
+    - target: {fileID: 6491924667419618059, guid: c8b6f0a0d91d8bc4f800d2a749fb3e83,
+        type: 3}
+      propertyPath: whiteBullet
+      value: 
+      objectReference: {fileID: 528125888032967929, guid: 680a025cc3e836d468312ef1027e2005,
+        type: 3}
     - target: {fileID: 6491924667419618056, guid: c8b6f0a0d91d8bc4f800d2a749fb3e83,
         type: 3}
       propertyPath: m_Constraints
       value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491924667419618063, guid: c8b6f0a0d91d8bc4f800d2a749fb3e83,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8b6f0a0d91d8bc4f800d2a749fb3e83, type: 3}

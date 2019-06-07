@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy2 : MonoBehaviour
+public class ShooterEnemy : MonoBehaviour
 {
     public Transform playerPos;
     public Transform enemyTransform;

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy1 : MonoBehaviour
+public class BasicEnemy : MonoBehaviour
 {
     public Transform playerPos;
     public Transform enemyTransform;
     public Rigidbody enemyRB;
     public Vector3 fullScale;
     public SpriteRenderer enemyRender;
+    public string enemyType;
     public float enemyHealth;
     public float enemyColorChange;
     public static bool active = false;
@@ -18,7 +19,13 @@ public class Enemy1 : MonoBehaviour
     public GameObject enemy2HP;
     public GameObject enemy1HP;
     public GameObject newEnemy;
-    // Start is called before the first frame update
+    //enemy bullet for shooter enemies
+    public GameObject enemyBullet;
+    public GameObject newEnemyBullet;
+    public Transform bulletTarget;
+    public float shootCooldown = 5f;
+    
+
     void Start()
     {
         EnemyCounter.enemyCount += 1;
@@ -28,54 +35,66 @@ public class Enemy1 : MonoBehaviour
         fullScale = enemyTransform.localScale;
         enemyTransform.localScale = new Vector3(0, 0, 0);
         enemyRB.AddForce(Random.Range(100f, -100f), 0, Random.Range(100f, -100f));
+        //target for bullet
+        bulletTarget = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //flash color when hit
         enemyColorChange -= Time.deltaTime;
         if (enemyColorChange <= 0)
-        {
-            enemyRender.material.color = Color.white;
-        }
+        { enemyRender.material.color = Color.white; }
 
         //grow to full size after spawning
         if (enemyTransform.localScale.x < fullScale.x)
-        {
-            enemyTransform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
-            enemyRB.detectCollisions = false;
-        }
+        { enemyTransform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
+          enemyRB.detectCollisions = false; }
 
         if (enemyTransform.localScale.x >= fullScale.x)
-        {
-            active = true;
-            enemyRB.detectCollisions = true;
-        }
+        { active = true;
+          enemyRB.detectCollisions = true;}
 
-        if (active == true)
-        {
-            Vector3 relativePos = GameObject.Find("player").transform.position - gameObject.transform.position;
-            enemyRB.AddForce(0.08f * relativePos);
-        }
+        //move towards player
+        if (active == true && enemyType != "enemyshoot")
+        { Vector3 relativePos = GameObject.Find("player").transform.position - gameObject.transform.position;
+          enemyRB.AddForce(0.08f * relativePos);
+          transform.rotation = Quaternion.Euler(-90, 0, transform.rotation.z); }
 
-        //prevents y movement and locks rotation
+        //lock y position
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
-        transform.rotation = Quaternion.Euler(-90, 0, transform.rotation.z);
+        //make shooter enemies aim towards player
+        if (enemyType == "enemyshoot")
+        { transform.LookAt(playerPos.position * -1f, transform.up * -50000f);
+          transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, 0);}
 
         //limiting max speed
         if (enemyRB.velocity.magnitude >= 4f && active == true)
-        {
-            enemyRB.velocity = enemyRB.velocity.normalized;
-        }
+        { enemyRB.velocity = enemyRB.velocity.normalized; }
 
+        //countdown to shoot
+        shootCooldown -= Time.deltaTime;
+        //shooting
+        if (shootCooldown <= 0 && enemyType == "enemyshoot")
+        { newEnemyBullet = Instantiate(enemyBullet, transform.position, transform.rotation);
+          newEnemyBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * -800);
+          shootCooldown = 5f; }
 
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "friendlyBullet" && killed == false)
+        if (other.gameObject.tag == "whiteBullet" && enemyType == "enemyblack")
+        {
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "blackBullet" && enemyType == "enemywhite")
+        {
+            Destroy(other.gameObject);
+        }
+
+        else if ((other.gameObject.tag == "whiteBullet" || other.gameObject.tag == "blackBullet") && killed == false)
         {
             enemyHealth -= 1;
             enemyRender.material.color = Color.cyan;
@@ -88,13 +107,9 @@ public class Enemy1 : MonoBehaviour
                 EnemyCounter.enemyCount -= 1;
                 Destroy(other.gameObject);
 
-                //check tag and act accordingly
-                if (gameObject.tag == "enemy1hp" || gameObject.tag == "enemyshoot")
-                {
-                    Destroy(gameObject);
-                }
+                //check enemy type and act accordingly
 
-                if (gameObject.tag == "enemy2hp")
+                if (enemyType == "enemy2hp" || enemyType == "enemyshoot")
                 {
                     //spawn 2 1hp enemies then die
                     newEnemy = Instantiate(enemy1HP, transform.position, transform.rotation);
@@ -106,7 +121,7 @@ public class Enemy1 : MonoBehaviour
                     Destroy(gameObject);
                 }
 
-                if (gameObject.tag == "enemy3hp")
+                if (enemyType == "enemy3hp")
                 {
                     //spawn 2 2hp enemies then die
                     newEnemy = Instantiate(enemy2HP, transform.position, transform.rotation);
@@ -115,6 +130,11 @@ public class Enemy1 : MonoBehaviour
                     newEnemy = Instantiate(enemy2HP, transform.position, transform.rotation);
                     newEnemy.transform.position += new Vector3(Random.Range(1f, -1f), 0, Random.Range(1f, -1f));
 
+                    Destroy(gameObject);
+                }
+
+                else
+                {
                     Destroy(gameObject);
                 }
             }
