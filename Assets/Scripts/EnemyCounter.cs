@@ -26,7 +26,17 @@ public class EnemyCounter : MonoBehaviour
 
     public GameObject enemyShoot;
 
+    public bool disableForTesting;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        if (disableForTesting)
+        {
+            Destroy(this.GetComponent<EnemyCounter>());
+        }
+    }
+
     void Start()
     {
         enemiesToSpawn = 12;

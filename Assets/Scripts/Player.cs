@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
        forwardInput = Input.GetAxis("Vertical");
        turnInput = Input.GetAxis("Horizontal");
        //shoot white bullet
-       if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space)) && fireCooldown <= 0 && death == false && fireMode == "white")
+       if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "white")
         { //spawn and move bullet;
           fireCooldown = 0.1f;
           newBullet = Instantiate(whiteBullet, transform.position, transform.rotation);
@@ -56,8 +56,8 @@ public class Player : MonoBehaviour
           newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
         }
 
-        //shoot black bullet
-        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space)) && fireCooldown <= 0 && death == false && fireMode == "black")
+        //shoot bullet
+        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "black")
         { //spawn and move bullet;
           fireCooldown = 0.1f;
           newBullet = Instantiate(blackBullet, transform.position, transform.rotation);
@@ -71,16 +71,10 @@ public class Player : MonoBehaviour
 
         //change firing mode between white and black
         if ((Input.GetKeyDown("e") || Input.GetKeyDown("x")) && death == false)
-        {   if (fireMode == "white")
-            {fireMode = "black";
-             playerAnim.SetBool("White", false);}
-            else if (fireMode == "black")
-            {fireMode = "white";
-             playerAnim.SetBool("White", true);}
+        {
+            switchBulletType();
         }
 
-        //lock y position
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
         //firing cooldown
         if (fireCooldown >= 0)
@@ -96,6 +90,20 @@ public class Player : MonoBehaviour
 
         
        
+    }
+
+    public void switchBulletType()
+    {
+        if (fireMode == "white")
+        {
+            fireMode = "black";
+            playerAnim.SetBool("White", false);
+        }
+        else if (fireMode == "black")
+        {
+            fireMode = "white";
+            playerAnim.SetBool("White", true);
+        }
     }
 
     void FixedUpdate()
