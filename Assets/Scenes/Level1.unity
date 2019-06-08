@@ -323,6 +323,7 @@ MonoBehaviour:
   forwardInput: 0
   acceleration: 50
   CurrentAcceleration: 0
+  moveForward: 0
   bulletForPositionTesting: {fileID: 528125888032967929, guid: 680a025cc3e836d468312ef1027e2005,
     type: 3}
 --- !u!1 &682397471
@@ -1802,7 +1803,7 @@ MonoBehaviour:
     type: 3}
   enemyShoot: {fileID: 5198607784513836636, guid: 9d9ec5ce7d440da48a52d0701783d41c,
     type: 3}
-  disableForTesting: 1
+  disableForTesting: 0
 --- !u!4 &2075096558
 Transform:
   m_ObjectHideFlags: 0
