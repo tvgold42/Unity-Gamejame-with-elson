@@ -117,29 +117,32 @@ public class Player : MonoBehaviour
         { playerRB.velocity *= -1; }
 
         //lose health/die when colliding with harmful things
-        else if (other.gameObject.tag == "enemy" && hurt == false && death == false)
+        
+        else if (other.gameObject.tag != "bound" && hurt == false && death == false)
         {
-            hurt = true;
-            invulnTimer = 2;
-            playerHealth -= 1;
-            playerRender.material.color = new Color(1f, 1f, 1f, 0.5f);
-            option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
-            option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
-            playerRB.velocity *= -3;
+
+                hurt = true;
+                invulnTimer = 2;
+                playerHealth -= 1;
+                playerRender.material.color = new Color(1f, 1f, 1f, 0.5f);
+                option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
+                option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
+                playerRB.velocity *= -3;
+                Debug.Log("damage!!!");
             //check if health 0;
             if (playerHealth <= 0)
-            {
-                death = true;
-                //play a player splat animation
-                //set a timer for transitioning to the game over screen
+                {
+                    death = true;
+                    //play a player splat animation
+                    //set a timer for transitioning to the game over screen
 
-                //for now because there is no death anim, just make character invisible
-                playerRender.material.color = new Color(1f, 1f, 1f, 0f);
-                option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
-                option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
-                Debug.Log("lose!!!");
+                    //for now because there is no death anim, just make character invisible
+                    playerRender.material.color = new Color(1f, 1f, 1f, 0f);
+                    option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
+                    option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
+                    Debug.Log("lose!!!");
+
             }
-            
         }
     }
 }

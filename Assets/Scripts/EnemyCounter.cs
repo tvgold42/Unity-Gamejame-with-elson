@@ -55,9 +55,9 @@ public class EnemyCounter : MonoBehaviour
                 { Instantiate(enemy2HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
                 if (Random.Range(0, 100) >= 80)
                 { Instantiate(enemyShoot, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-                if (Random.Range(0, 100) >= 60)
+                if (Random.Range(0, 100) >= 60) //60
                 { Instantiate(whiteEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-                if (Random.Range(0, 100) >= 60)
+                if (Random.Range(0, 100) >= 60) //60
                 { Instantiate(blackEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
                 else { Instantiate(enemy1HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
             }

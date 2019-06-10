@@ -8,6 +8,8 @@ TagManager:
   - enemy
   - blackBullet
   - whiteBullet
+  - enemyWhite
+  - enemyBlack
   layers:
   - Default
   - TransparentFX
