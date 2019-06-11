@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
        //input for moving/firing
        forwardInput = Input.GetAxis("Vertical");
        turnInput = Input.GetAxis("Horizontal");
+
        //shoot white bullet
        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space)) && fireCooldown <= 0 && death == false && fireMode == "white")
         { //spawn and move bullet;
@@ -104,7 +105,7 @@ public class Player : MonoBehaviour
         if (death == false)
         {
             playerRB.AddRelativeForce(Vector2.up * forwardInput * (acceleration));
-            playerRB.AddTorque(0, turnInput * 4, 0);
+            playerRB.AddTorque(0, turnInput * 3f, 0);
         }
     }
 
@@ -114,7 +115,9 @@ public class Player : MonoBehaviour
         //for boucning off the edges of the stage
         //will work once we add a 3d ring
         if (other.gameObject.tag == "bound")
-        { playerRB.velocity *= -1; }
+        { playerRB.velocity *= 1.5f;
+          transform.rotation = Quaternion.Euler(-90, 0, transform.rotation.z + 180);
+        }
 
         //lose health/die when colliding with harmful things
         
