@@ -39,7 +39,7 @@ public class EnemyCounter : MonoBehaviour
 
     void Start()
     {
-        enemiesToSpawn = 12;
+        enemiesToSpawn = 3;
         timeBetweenSpawn = 0.5f;
     }
 
