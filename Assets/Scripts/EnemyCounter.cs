@@ -26,20 +26,10 @@ public class EnemyCounter : MonoBehaviour
 
     public GameObject enemyShoot;
 
-    public bool disableForTesting;
-
     // Start is called before the first frame update
-    private void Awake()
-    {
-        if (disableForTesting)
-        {
-            Destroy(this.GetComponent<EnemyCounter>());
-        }
-    }
-
     void Start()
     {
-        enemiesToSpawn = 3;
+        enemiesToSpawn = 12;
         timeBetweenSpawn = 0.5f;
     }
 
@@ -65,9 +55,9 @@ public class EnemyCounter : MonoBehaviour
                 { Instantiate(enemy2HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
                 if (Random.Range(0, 100) >= 80)
                 { Instantiate(enemyShoot, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-                if (Random.Range(0, 100) >= 60)
+                if (Random.Range(0, 100) >= 60) //60
                 { Instantiate(whiteEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-                if (Random.Range(0, 100) >= 60)
+                if (Random.Range(0, 100) >= 60) //60
                 { Instantiate(blackEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
                 else { Instantiate(enemy1HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
             }

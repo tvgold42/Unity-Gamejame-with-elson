@@ -119,6 +119,7 @@ public class BasicEnemy : MonoBehaviour
                     newEnemy.transform.position += new Vector3(Random.Range(1f, -1), 0, Random.Range(1f, -1f));
 
                     Destroy(gameObject);
+                    Score.score += 300;
                 }
 
                 if (enemyType == "enemy3hp")
@@ -131,11 +132,14 @@ public class BasicEnemy : MonoBehaviour
                     newEnemy.transform.position += new Vector3(Random.Range(1f, -1f), 0, Random.Range(1f, -1f));
 
                     Destroy(gameObject);
+                    Score.score += 500;
                 }
 
                 else
                 {
                     Destroy(gameObject);
+                    Score.score += 200;
+                    
                 }
             }
         }
