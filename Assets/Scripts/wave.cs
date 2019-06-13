@@ -19,6 +19,6 @@ public class wave : MonoBehaviour
     void Update()
     {
         privatewave = Wave;
-        waveText.text = "Wave: " + enemyCounter.waveCount;
+        waveText.text = "Wave: " + EnemyCounter.waveCount;
     }
 }
