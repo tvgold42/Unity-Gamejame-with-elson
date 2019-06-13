@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public float invulnTimer;
     public string fireMode = "white";
     public float deathTimer = 2;
+    public Animator playerAnimator;
 
     public bool hurt = false;
     public bool death = false;
@@ -34,6 +35,8 @@ public class Player : MonoBehaviour
     public GameObject AimingTarget;
     public int maxBullets;
     public GameObject Gun;
+
+    private int screenSpaceHalfwayX;
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
@@ -42,7 +45,8 @@ public class Player : MonoBehaviour
         playerHealth = 3;
         whiteBulletsLeftSlider = GameObject.Find("bullet type remaining").GetComponent<Scrollbar>();
         whiteBulletsLeftSlider.size = (whiteBulletsLeft / maxBullets);
-
+        playerAnimator = this.GetComponent<Animator>();
+        screenSpaceHalfwayX = Screen.width / 2;
     }
 
     // Update is called once per frame
@@ -161,12 +165,21 @@ public class Player : MonoBehaviour
 
         mousePos.x = Input.mousePosition.x;
         mousePos.y = Input.mousePosition.y;
+        
 
         AimingTarget.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
 
         //Debug.Log("mouse pos = " + mousePos);
 
         Gun.transform.LookAt(AimingTarget.transform);
+        if (mousePos.x > screenSpaceHalfwayX)
+        {
+            playerAnimator.SetBool("isLookingLeft", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("isLookingLeft", false);
+        }
     }
 
 
