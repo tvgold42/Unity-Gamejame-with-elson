@@ -6,7 +6,7 @@ public class EnemyCounter : MonoBehaviour
 {
     public static float enemyCount = 0;
 
-    public static float waveCount = 1;
+    public float waveCount = 1;
     public float enemiesToSpawn;
     public float enemiesSpawned;
 

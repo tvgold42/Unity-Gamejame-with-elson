@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public Rigidbody playerRB;
@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float turnInput;
     public float acceleration;
     public float fireCooldown;
+    public float maxCooldown;
     public float invulnTimer;
     public string fireMode = "white";
     public float deathTimer = 2;
@@ -28,13 +29,19 @@ public class Player : MonoBehaviour
     public GameObject option1;
     public GameObject option2;
 
+    private Scrollbar whiteBulletsLeftSlider;
+    public float whiteBulletsLeft = 30;
+    public GameObject AimingTarget;
+    public int maxBullets;
+    public GameObject Gun;
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
         playerRender = GetComponent<SpriteRenderer>();
         playerAnim = GetComponent<Animator>();
         playerHealth = 3;
-        
+        whiteBulletsLeftSlider = GameObject.Find("bullet type remaining").GetComponent<Scrollbar>();
+        whiteBulletsLeftSlider.size = (whiteBulletsLeft / maxBullets);
 
     }
 
@@ -46,34 +53,47 @@ public class Player : MonoBehaviour
        forwardInput = Input.GetAxis("Vertical");
        turnInput = Input.GetAxis("Horizontal");
 
-       //shoot white bullet
-       if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space)) && fireCooldown <= 0 && death == false && fireMode == "white")
+
+
+        //shoot white bullet
+        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "white" && whiteBulletsLeft > 0)
         { //spawn and move bullet;
-          fireCooldown = 0.1f;
-          newBullet = Instantiate(whiteBullet, transform.position, transform.rotation);
-          newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
-          //do the same on the options
-          newBullet = Instantiate(whiteBullet, option1.transform.position, option1.transform.rotation);
-          newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
-          newBullet = Instantiate(whiteBullet, option2.transform.position, option2.transform.rotation);
-          newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
+
+
+            fireCooldown = maxCooldown;
+          newBullet = Instantiate(whiteBullet, Gun.transform.position, Gun.transform.rotation);
+          newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+          whiteBulletsLeft--;
+          whiteBulletsLeftSlider.size = (whiteBulletsLeft / maxBullets);
+          
+          ////do the same on the options
+          //newBullet = Instantiate(whiteBullet, option1.transform.position, option1.transform.rotation);
+          //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
+          //newBullet = Instantiate(whiteBullet, option2.transform.position, option2.transform.rotation);
+          //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
+
+
         }
 
         //shoot black bullet
-        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space)) && fireCooldown <= 0 && death == false && fireMode == "black")
+        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "black" && whiteBulletsLeft < maxBullets)
         { //spawn and move bullet;
-          fireCooldown = 0.1f;
-          newBullet = Instantiate(blackBullet, transform.position, transform.rotation);
-          newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
-          //do the same on the options
-          newBullet = Instantiate(blackBullet, option1.transform.position, option1.transform.rotation);
-          newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
-          newBullet = Instantiate(blackBullet, option2.transform.position, option2.transform.rotation);
-          newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
+          fireCooldown = maxCooldown;
+            newBullet = Instantiate(blackBullet, Gun.transform.position, Gun.transform.rotation);
+            newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+
+          whiteBulletsLeft++;
+          whiteBulletsLeftSlider.size = whiteBulletsLeft / maxBullets;
+
+            ////do the same on the options
+            //newBullet = Instantiate(blackBullet, option1.transform.position, option1.transform.rotation);
+            //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
+            //newBullet = Instantiate(blackBullet, option2.transform.position, option2.transform.rotation);
+            //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
         }
 
         //change firing mode between white and black
-        if ((Input.GetKeyDown("e") || Input.GetKeyDown("x")) && death == false)
+        if ((Input.GetKeyDown("e") || Input.GetKeyDown("x") || Input.GetMouseButtonDown(1)) && death == false)
         {   if (fireMode == "white")
             {fireMode = "black";
              playerAnim.SetBool("White", false);}
@@ -82,8 +102,6 @@ public class Player : MonoBehaviour
              playerAnim.SetBool("White", true);}
         }
 
-        //lock y position
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
         //firing cooldown
         if (fireCooldown >= 0)
@@ -93,12 +111,26 @@ public class Player : MonoBehaviour
         if (hurt == true && invulnTimer <= 0 && death == false)
         { hurt = false;
           playerRender.material.color = new Color(1f, 1f, 1f, 1f);
-          option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 1f);
-          option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 1f);
+          //option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 1f);
+          //option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 1f);
         }
 
         
        
+    }
+
+    public void switchBulletType()
+    {
+        if (fireMode == "white")
+        {
+            fireMode = "black";
+            playerAnim.SetBool("White", false);
+        }
+        else if (fireMode == "black")
+        {
+            fireMode = "white";
+            playerAnim.SetBool("White", true);
+        }
     }
 
     void FixedUpdate()
@@ -106,8 +138,8 @@ public class Player : MonoBehaviour
         //movement
         if (death == false)
         {
-            playerRB.AddRelativeForce(Vector2.up * forwardInput * (acceleration));
-            playerRB.AddTorque(0, turnInput * 3f, 0);
+          //  playerRB.AddRelativeForce(Vector2.up * forwardInput * (acceleration));
+            //playerRB.AddTorque(0, turnInput * 3f, 0);
         }
         if(death == true)
         {
@@ -116,7 +148,24 @@ public class Player : MonoBehaviour
             {
                 SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
             }
+            playerRB.AddForce(new Vector3(turnInput * -1, 0,forwardInput * -1)  * (acceleration));
+            // playerRB.AddTorque(0, turnInput * 3f, 0);
+
         }
+    }
+
+    private void LateUpdate()
+    {
+        Vector2 mousePos = new Vector2();
+
+        mousePos.x = Input.mousePosition.x;
+        mousePos.y = Input.mousePosition.y;
+
+        AimingTarget.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
+
+        Debug.Log("mouse pos = " + mousePos);
+
+        Gun.transform.LookAt(AimingTarget.transform);
     }
 
 
@@ -138,8 +187,8 @@ public class Player : MonoBehaviour
                 invulnTimer = 2;
                 playerHealth -= 1;
                 playerRender.material.color = new Color(1f, 1f, 1f, 0.5f);
-                option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
-                option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
+                //option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
+                //option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
                 playerRB.velocity *= -3;
                 Debug.Log("damage!!!");
             //check if health 0;
