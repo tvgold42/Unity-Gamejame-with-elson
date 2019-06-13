@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class wave : MonoBehaviour
+public class Wave : MonoBehaviour
 {
-    public static int Wave;
+    public static int wave;
     private int privatewave;
     public Text waveText;
     private EnemyCounter enemyCounter;
@@ -18,7 +18,7 @@ public class wave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        privatewave = Wave;
+        privatewave = wave;
         waveText.text = "Wave: " + EnemyCounter.waveCount;
     }
 }
