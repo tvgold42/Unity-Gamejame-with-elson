@@ -11,7 +11,10 @@ public class MenuHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        menuButton.onClick.AddListener(MenuButtonFunction);//adds a listener for when you click the button
+        if (SceneManager.GetActiveScene().name != "Title")
+        {
+            menuButton.onClick.AddListener(MenuButtonFunction);//adds a listener for when you click the button
+        }
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     public float fireCooldown;
     public float invulnTimer;
     public string fireMode = "white";
+    public float deathTimer = 2;
 
     public bool hurt = false;
     public bool death = false;
@@ -106,6 +108,14 @@ public class Player : MonoBehaviour
         {
             playerRB.AddRelativeForce(Vector2.up * forwardInput * (acceleration));
             playerRB.AddTorque(0, turnInput * 3f, 0);
+        }
+        if(death == true)
+        {
+            deathTimer -= Time.deltaTime;
+            if(deathTimer <= 0)
+            {
+                SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+            }
         }
     }
 
