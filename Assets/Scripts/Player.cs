@@ -138,17 +138,18 @@ public class Player : MonoBehaviour
         //movement
         if (death == false)
         {
-          //  playerRB.AddRelativeForce(Vector2.up * forwardInput * (acceleration));
+            //  playerRB.AddRelativeForce(Vector2.up * forwardInput * (acceleration));
             //playerRB.AddTorque(0, turnInput * 3f, 0);
+            playerRB.AddForce(new Vector3(turnInput * -1, 0, forwardInput * -1) * (acceleration));
+
         }
-        if(death == true)
+        if (death == true)
         {
             deathTimer -= Time.deltaTime;
             if(deathTimer <= 0)
             {
                 SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
             }
-            playerRB.AddForce(new Vector3(turnInput * -1, 0,forwardInput * -1)  * (acceleration));
             // playerRB.AddTorque(0, turnInput * 3f, 0);
 
         }
@@ -163,7 +164,7 @@ public class Player : MonoBehaviour
 
         AimingTarget.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
 
-        Debug.Log("mouse pos = " + mousePos);
+        //Debug.Log("mouse pos = " + mousePos);
 
         Gun.transform.LookAt(AimingTarget.transform);
     }
@@ -200,9 +201,11 @@ public class Player : MonoBehaviour
 
                     //for now because there is no death anim, just make character invisible
                     playerRender.material.color = new Color(1f, 1f, 1f, 0f);
-                    option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
-                    option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
-                    Debug.Log("lose!!!");
+                    Gun.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
+
+                //option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
+                //option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
+                Debug.Log("lose!!!");
 
             }
         }
