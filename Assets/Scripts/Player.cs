@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     public float whiteBulletsLeft = 30;
     public GameObject AimingTarget;
     public int maxBullets;
-
+    public GameObject Gun;
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
@@ -53,13 +53,13 @@ public class Player : MonoBehaviour
 
 
 
-        
-
-       //shoot white bullet
+        //shoot white bullet
         if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "white" && whiteBulletsLeft > 0)
         { //spawn and move bullet;
-          fireCooldown = maxCooldown;
-          newBullet = Instantiate(whiteBullet, transform.position, transform.rotation);
+
+
+            fireCooldown = maxCooldown;
+          newBullet = Instantiate(whiteBullet, Gun.transform.position, Gun.transform.rotation);
           newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
           whiteBulletsLeft--;
           whiteBulletsLeftSlider.size = (whiteBulletsLeft / maxBullets);
@@ -77,8 +77,8 @@ public class Player : MonoBehaviour
         if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "black" && whiteBulletsLeft < maxBullets)
         { //spawn and move bullet;
           fireCooldown = maxCooldown;
-          newBullet = Instantiate(blackBullet, transform.position, transform.rotation);
-          newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+            newBullet = Instantiate(blackBullet, Gun.transform.position, Gun.transform.rotation);
+            newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
 
           whiteBulletsLeft++;
           whiteBulletsLeftSlider.size = whiteBulletsLeft / maxBullets;
@@ -139,13 +139,21 @@ public class Player : MonoBehaviour
             playerRB.AddForce(new Vector3(turnInput * -1, 0,forwardInput * -1)  * (acceleration));
             // playerRB.AddTorque(0, turnInput * 3f, 0);
 
-            //aiming target mover, taken in part from https://answers.unity.com/questions/540888/converting-mouse-position-to-world-stationary-came.html
-            var mousecast = Input.mousePosition;
-            mousecast.z = 2;
-            mousecast.z = 2;
-            AimingTarget.transform.position = Camera.main.ScreenToWorldPoint(mousecast);
-            this.transform.LookAt(AimingTarget.transform);
         }
+    }
+
+    private void LateUpdate()
+    {
+        Vector2 mousePos = new Vector2();
+
+        mousePos.x = Input.mousePosition.x;
+        mousePos.y = Input.mousePosition.y;
+
+        AimingTarget.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
+
+        Debug.Log("mouse pos = " + mousePos);
+
+        Gun.transform.LookAt(AimingTarget.transform);
     }
 
 
@@ -167,8 +175,8 @@ public class Player : MonoBehaviour
                 invulnTimer = 2;
                 playerHealth -= 1;
                 playerRender.material.color = new Color(1f, 1f, 1f, 0.5f);
-                option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
-                option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
+                //option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
+                //option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
                 playerRB.velocity *= -3;
                 Debug.Log("damage!!!");
             //check if health 0;
