@@ -34,7 +34,10 @@ public class Player : MonoBehaviour
     public float whiteBulletsLeft = 30;
     public GameObject AimingTarget;
     public int maxBullets;
-    public GameObject Gun;
+    public GameObject GunHolder;
+    public GameObject Gun1;
+    public GameObject Gun2;
+    public GameObject Gun3;
 
     private int screenSpaceHalfwayX;
     void Start()
@@ -64,9 +67,14 @@ public class Player : MonoBehaviour
         { //spawn and move bullet;
 
 
-            fireCooldown = maxCooldown;
-          newBullet = Instantiate(whiteBullet, Gun.transform.position, Gun.transform.rotation);
-          newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        fireCooldown = maxCooldown;
+        newBullet = Instantiate(whiteBullet, Gun1.transform.position, Gun1.transform.rotation);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        newBullet = Instantiate(whiteBullet, Gun2.transform.position, Gun2.transform.rotation);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        newBullet = Instantiate(whiteBullet, Gun3.transform.position, Gun3.transform.rotation);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+
           whiteBulletsLeft--;
           whiteBulletsLeftSlider.size = (whiteBulletsLeft / maxBullets);
           
@@ -82,12 +90,15 @@ public class Player : MonoBehaviour
         //shoot black bullet
         if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "black" && whiteBulletsLeft < maxBullets)
         { //spawn and move bullet;
-          fireCooldown = maxCooldown;
-            newBullet = Instantiate(blackBullet, Gun.transform.position, Gun.transform.rotation);
-            newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
-
-          whiteBulletsLeft++;
-          whiteBulletsLeftSlider.size = whiteBulletsLeft / maxBullets;
+        fireCooldown = maxCooldown;
+        newBullet = Instantiate(blackBullet, Gun1.transform.position, Gun1.transform.rotation);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        newBullet = Instantiate(blackBullet, Gun2.transform.position, Gun2.transform.rotation);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        newBullet = Instantiate(blackBullet, Gun3.transform.position, Gun3.transform.rotation);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        whiteBulletsLeft++;
+        whiteBulletsLeftSlider.size = whiteBulletsLeft / maxBullets;
 
             ////do the same on the options
             //newBullet = Instantiate(blackBullet, option1.transform.position, option1.transform.rotation);
@@ -171,7 +182,7 @@ public class Player : MonoBehaviour
 
         //Debug.Log("mouse pos = " + mousePos);
 
-        Gun.transform.LookAt(AimingTarget.transform);
+        GunHolder.transform.LookAt(AimingTarget.transform);
         if (mousePos.x > screenSpaceHalfwayX)
         {
             playerAnimator.SetBool("isLookingLeft", true);
@@ -214,7 +225,9 @@ public class Player : MonoBehaviour
 
                     //for now because there is no death anim, just make character invisible
                     playerRender.material.color = new Color(1f, 1f, 1f, 0f);
-                    Gun.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
+                    Gun1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
+                    Gun2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
+                    Gun3.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
 
                 //option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
                 //option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
