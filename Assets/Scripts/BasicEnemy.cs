@@ -58,7 +58,7 @@ public class BasicEnemy : MonoBehaviour
         //move towards player
         if (active == true && enemyType != "enemyshoot")
         { Vector3 relativePos = GameObject.Find("player").transform.position - gameObject.transform.position;
-          enemyRB.AddForce(0.08f * relativePos);
+          enemyRB.AddForce(1f * relativePos);
           transform.rotation = Quaternion.Euler(-90, 0, transform.rotation.z); }
 
         //lock y position
@@ -70,8 +70,8 @@ public class BasicEnemy : MonoBehaviour
           transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, 0);}
 
         //limiting max speed
-        if (enemyRB.velocity.magnitude >= 4f && active == true)
-        { enemyRB.velocity = enemyRB.velocity.normalized; }
+        //if (enemyRB.velocity.magnitude >= 4f && active == true)
+       // { enemyRB.velocity = enemyRB.velocity.normalized; }
 
         //countdown to shoot
         shootCooldown -= Time.deltaTime;

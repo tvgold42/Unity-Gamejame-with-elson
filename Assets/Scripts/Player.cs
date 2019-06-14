@@ -69,11 +69,11 @@ public class Player : MonoBehaviour
 
         fireCooldown = maxCooldown;
         newBullet = Instantiate(whiteBullet, Gun1.transform.position, Gun1.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
         newBullet = Instantiate(whiteBullet, Gun2.transform.position, Gun2.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
         newBullet = Instantiate(whiteBullet, Gun3.transform.position, Gun3.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
 
           whiteBulletsLeft--;
           whiteBulletsLeftSlider.size = (whiteBulletsLeft / maxBullets);
@@ -92,11 +92,11 @@ public class Player : MonoBehaviour
         { //spawn and move bullet;
         fireCooldown = maxCooldown;
         newBullet = Instantiate(blackBullet, Gun1.transform.position, Gun1.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
         newBullet = Instantiate(blackBullet, Gun2.transform.position, Gun2.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
         newBullet = Instantiate(blackBullet, Gun3.transform.position, Gun3.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2000);
+        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
         whiteBulletsLeft++;
         whiteBulletsLeftSlider.size = whiteBulletsLeft / maxBullets;
 
@@ -199,7 +199,7 @@ public class Player : MonoBehaviour
         //for boucning off the edges of the stage
         //will work once we add a 3d ring
         if (other.gameObject.tag == "bound")
-        { playerRB.velocity *= 1.5f;
+        { playerRB.velocity *= -1f;
           transform.rotation = Quaternion.Euler(-90, 0, transform.rotation.z + 180);
         }
 

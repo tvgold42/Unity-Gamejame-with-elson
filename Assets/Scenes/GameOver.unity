@@ -831,6 +831,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbc3d1dbe34f4840b8561f780252c40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToUpdate: 0.5
+  updateRecords: 0
   highText: {fileID: 0}
 --- !u!114 &935565508
 MonoBehaviour:
