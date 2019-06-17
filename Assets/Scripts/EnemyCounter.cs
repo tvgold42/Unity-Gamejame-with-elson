@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnemyCounter : MonoBehaviour
 {
     public static float enemyCount = 0;
-    public float publiEnemyCount;
+    public float publicEnemyCount = 0;
     public static float waveCount = 1;
-    public float enemiesToSpawn;
-    public float enemiesSpawned;
+    public float enemiesToSpawn = 0;
+    public float enemiesSpawned = 0;
 
     public float levelWidth;
     public float levelHeight;
@@ -31,13 +31,18 @@ public class EnemyCounter : MonoBehaviour
     {
         enemiesToSpawn = 12;
         timeBetweenSpawn = 0.5f;
-        
-    }
+
+        enemyCount = 0;
+        publicEnemyCount = 0;
+        waveCount = 1;
+        enemiesSpawned = 0;
+
+}
 
     // Update is called once per frame
     void Update()
     {
-        publiEnemyCount = enemyCount;
+        publicEnemyCount = enemyCount;
         timeBetweenSpawn -= Time.deltaTime;
 
         if (waveComplete == false)

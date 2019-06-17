@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7900044049442312791}
   - component: {fileID: 4512062979079499438}
   - component: {fileID: 4356092424491162282}
+  - component: {fileID: 8634862212572742623}
   m_Layer: 0
   m_Name: Blood cell
   m_TagString: Untagged
@@ -97,3 +98,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8634862212572742623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2784006679328152178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3ee19759621c545843cea1b631d221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodAnim: {fileID: 0}
+  timeToStart: 1
