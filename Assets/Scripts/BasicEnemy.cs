@@ -9,6 +9,9 @@ public class BasicEnemy : MonoBehaviour
     public Rigidbody enemyRB;
     public Vector3 fullScale;
     public SpriteRenderer enemyRender;
+    public AudioSource enemySound;
+    public AudioClip enemyHurt;
+    public AudioClip enemyDie;
     public string enemyType;
     public float enemyHealth;
     public float enemyColorChange;
@@ -32,6 +35,7 @@ public class BasicEnemy : MonoBehaviour
         enemyRB = GetComponent<Rigidbody>();
         enemyTransform = GetComponent<Transform>();
         enemyRender = GetComponent<SpriteRenderer>();
+        enemySound = GetComponent<AudioSource>();
         fullScale = enemyTransform.localScale;
         enemyTransform.localScale = new Vector3(0, 0, 0);
         enemyRB.AddForce(Random.Range(100f, -100f), 0, Random.Range(100f, -100f));
@@ -96,12 +100,18 @@ public class BasicEnemy : MonoBehaviour
 
         else if ((other.gameObject.tag == "whiteBullet" || other.gameObject.tag == "blackBullet") && killed == false)
         {
+            //play hurt sound
+            enemySound.PlayOneShot(enemyHurt, 1f);
+
             enemyHealth -= 1;
             enemyRender.material.color = Color.cyan;
             enemyColorChange = 0.07f;
 
             if (enemyHealth <= 0)
             {
+                //play hurt sound
+                enemySound.PlayOneShot(enemyDie, 1f);
+
                 killed = true;
                 Debug.Log("killed enemy");
                 EnemyCounter.enemyCount -= 1;
