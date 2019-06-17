@@ -82,7 +82,8 @@ public class BasicEnemy : MonoBehaviour
         //shooting
         if (shootCooldown <= 0 && enemyType == "enemyshoot")
         { newEnemyBullet = Instantiate(enemyBullet, transform.position, transform.rotation);
-          newEnemyBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * -800);
+        Debug.Log("Bullet Fired at " + transform.position);
+          newEnemyBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 800);
           shootCooldown = 5f; }
 
     }

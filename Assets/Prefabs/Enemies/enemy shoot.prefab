@@ -134,7 +134,7 @@ MonoBehaviour:
   enemyHurt: {fileID: 8300000, guid: 2465017a20370a14284166e983742e0b, type: 3}
   enemyDie: {fileID: 8300000, guid: 114c80145ce9f17479e224292e322c84, type: 3}
   enemyType: enemyshoot
-  enemyHealth: 0
+  enemyHealth: 3
   enemyColorChange: 0
   killed: 0
   enemy2HP: {fileID: 2818802747742057710, guid: 0f354f3dbbe21454fb1e02bd0a2ce280,
@@ -146,7 +146,7 @@ MonoBehaviour:
     type: 3}
   newEnemyBullet: {fileID: 0}
   bulletTarget: {fileID: 0}
-  shootCooldown: 5
+  shootCooldown: 2
 --- !u!82 &-1097257574946095878
 AudioSource:
   m_ObjectHideFlags: 0

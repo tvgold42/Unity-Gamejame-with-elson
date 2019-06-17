@@ -5,10 +5,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float bulletLife;
+    public float totalBulletLife;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log ("I Was Shot");
     }
 
     // Update is called once per frame
@@ -16,7 +17,7 @@ public class Bullet : MonoBehaviour
     {
         //destory bullet if it exists for too long
        this.bulletLife += Time.deltaTime;
-        if (this.bulletLife >= 2)
+        if (this.bulletLife >= totalBulletLife)
         {
             Destroy(this.gameObject);
         }
