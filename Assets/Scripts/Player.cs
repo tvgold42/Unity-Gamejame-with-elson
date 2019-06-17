@@ -38,6 +38,9 @@ public class Player : MonoBehaviour
     public GameObject Gun1;
     public GameObject Gun2;
     public GameObject Gun3;
+    public AudioSource playerSound;
+    public AudioClip shootSound;
+    public AudioClip dieSound;
 
     private int screenSpaceHalfwayX;
     void Start()
@@ -45,6 +48,7 @@ public class Player : MonoBehaviour
         playerRB = GetComponent<Rigidbody>();
         playerRender = GetComponent<SpriteRenderer>();
         playerAnim = GetComponent<Animator>();
+        playerSound = GetComponent<AudioSource>();
         playerHealth = 3;
         whiteBulletsLeftSlider = GameObject.Find("bullet type remaining").GetComponent<Scrollbar>();
         whiteBulletsLeftSlider.size = (whiteBulletsLeft / maxBullets);
@@ -59,6 +63,8 @@ public class Player : MonoBehaviour
        //input for moving/firing
        forwardInput = Input.GetAxis("Vertical");
        turnInput = Input.GetAxis("Horizontal");
+        //lock rotation
+        transform.rotation = Quaternion.Euler(-90, 0, 0);
 
 
 
@@ -66,6 +72,8 @@ public class Player : MonoBehaviour
         if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "white" && whiteBulletsLeft > 0)
         { //spawn and move bullet;
 
+            //play fire sound
+            playerSound.PlayOneShot(shootSound, 1f);
 
         fireCooldown = maxCooldown;
         newBullet = Instantiate(whiteBullet, Gun1.transform.position, Gun1.transform.rotation);
@@ -89,8 +97,12 @@ public class Player : MonoBehaviour
 
         //shoot black bullet
         if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "black" && whiteBulletsLeft < maxBullets)
-        { //spawn and move bullet;
-        fireCooldown = maxCooldown;
+        {
+            //play fire sound
+            playerSound.PlayOneShot(shootSound, 1f);
+            
+            //spawn and move bullet;
+            fireCooldown = maxCooldown;
         newBullet = Instantiate(blackBullet, Gun1.transform.position, Gun1.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
         newBullet = Instantiate(blackBullet, Gun2.transform.position, Gun2.transform.rotation);
@@ -207,8 +219,10 @@ public class Player : MonoBehaviour
         
         else if (other.gameObject.tag != "bound" && hurt == false && death == false)
         {
+            //play hurt sound
+            playerSound.PlayOneShot(dieSound, 1f);
 
-                hurt = true;
+            hurt = true;
                 invulnTimer = 2;
                 playerHealth -= 1;
                 playerRender.material.color = new Color(1f, 1f, 1f, 0.5f);
