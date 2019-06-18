@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Enemy_Counter_Designers_Test : MonoBehaviour
 {
     public static float enemyCount = 0;
@@ -44,6 +44,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         publicEnemyCount = 0;
         waveCount = 1;
         updateWaveTotal();
+        Debug.Log("you are currently on level " + SceneManager.GetActiveScene().name);
     }
     
     void updateWaveTotal()
@@ -94,6 +95,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         {
             waveComplete = false;
             waveCount += 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
