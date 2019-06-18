@@ -33,7 +33,8 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
     public int shootersHPToSpawn;
     public int shootersSpawned;
     public bool finishedSpawning;
-
+    public int totalInWave;
+    public int totalKilledSoFar;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,17 +43,26 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         enemyCount = 0;
         publicEnemyCount = 0;
         waveCount = 1;
-
-        
-
-}
+        updateWaveTotal();
+    }
+    
+    void updateWaveTotal()
+    {
+        totalKilledSoFar = 0;
+        totalInWave = oneHPToSpawn + (twoHPToSpawn * 3) + (threeHPToSpawn * 7) + (shootersHPToSpawn * 3);
+    }
 
     // Update is called once per frame
     void Update()
     {
         publicEnemyCount = enemyCount;
         timeBetweenSpawn -= Time.deltaTime;
+        if (totalKilledSoFar== totalInWave)
+        {
+            Debug.Log("Wave Finished");
+            waveComplete = true;
 
+        }
         if (waveComplete == false)
         {
             //spawn the waves enemies
@@ -74,21 +84,6 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
                 if (oneHPToSpawn > oneHPSpawned) { Instantiate(enemy1HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); oneHPSpawned++; }
             }
         }
-
-
-
-
-        //winning a wave
-       /*  if (enemyCount <= 0 && enemiesToSpawn <= 0 && waveComplete == false)
-        {
-            Debug.Log("Wave Complete!!!");
-            if (waveCount >= 5)
-            {
-                Debug.Log("GAME COMPLETE");
-            }
-            waveComplete = true;
-            timeBetweenWaves = 5f;
-        }*/
 
         //counting to next wave
         if (waveComplete == true && timeBetweenWaves >= 0 && waveCount < 5)
