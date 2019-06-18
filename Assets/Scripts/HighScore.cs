@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class HighScore : MonoBehaviour
 {
-    public static int playerScore;
+    public static float playerScore;
 
-    public static int highScore1 = 0;
-    public static int highScore2 = 0;
-    public static int highScore3 = 0;
+    public static float highScore1 = 99999;
+    public static float highScore2 = 99999;
+    public static float highScore3 = 99999;
     public float timeToUpdate = 0.5f;
     public bool updateRecords = false;
 
@@ -21,7 +21,6 @@ public class HighScore : MonoBehaviour
     {
         highText = GetComponent<Text>();
         Load();
-        
     }
 
     // Update is called once per frame
@@ -29,7 +28,7 @@ public class HighScore : MonoBehaviour
     {
         timeToUpdate -= Time.deltaTime;
 
-        if (SceneManager.GetActiveScene().name == "GameOver")
+        if (SceneManager.GetActiveScene().name == "Victory")
         {
             highText.text = "Score: " + playerScore;
 
@@ -37,18 +36,18 @@ public class HighScore : MonoBehaviour
             {
                 updateRecords = true;
                 //check if record broken, if yes, move all records down the list
-                if (playerScore >= highScore1)
+                if (playerScore <= highScore1)
                 {
                     highScore3 = highScore2;
                     highScore2 = highScore1;
                     highScore1 = playerScore;
                 }
-                else if (playerScore >= highScore2)
+                else if (playerScore <= highScore2)
                 {
                     highScore3 = highScore2;
                     highScore2 = playerScore;
                 }
-                else if (playerScore >= highScore3)
+                else if (playerScore <= highScore3)
                 {
                     highScore3 = playerScore;
                 }
@@ -67,20 +66,20 @@ public class HighScore : MonoBehaviour
     public void Save()
     {
         //update save with new records
-        PlayerPrefs.SetInt("Record1", highScore1);
-        PlayerPrefs.SetInt("Record2", highScore2);
-        PlayerPrefs.SetInt("Record3", highScore3);
+        PlayerPrefs.SetFloat("Record1", highScore1);
+        PlayerPrefs.SetFloat("Record2", highScore2);
+        PlayerPrefs.SetFloat("Record3", highScore3);
     }
 
     public void Load()
     {
         //check if record exists, then load it
         if (PlayerPrefs.HasKey("Record1"))
-        { highScore1 = PlayerPrefs.GetInt("Record1"); }
+        { highScore1 = PlayerPrefs.GetFloat("Record1"); }
         if (PlayerPrefs.HasKey("Record2"))
-        { highScore2 = PlayerPrefs.GetInt("Record2"); }
+        { highScore2 = PlayerPrefs.GetFloat("Record2"); }
         if (PlayerPrefs.HasKey("Record3"))
-        { highScore3 = PlayerPrefs.GetInt("Record3"); }
+        { highScore3 = PlayerPrefs.GetFloat("Record3"); }
     }
 
     public void Delete()

@@ -11,7 +11,7 @@ public class HighScoreText : MonoBehaviour
     {
         textRender = GetComponent<SpriteRenderer>();
 
-        if (HighScore.playerScore <= HighScore.highScore1)
+        if (HighScore.playerScore >= HighScore.highScore1)
         {
             textRender.enabled = false;
         }

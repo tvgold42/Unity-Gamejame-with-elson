@@ -16,10 +16,15 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         //destory bullet if it exists for too long
-       this.bulletLife += Time.deltaTime;
-        if (this.bulletLife >= totalBulletLife)
+       bulletLife += Time.deltaTime;
+        if (bulletLife >= totalBulletLife && gameObject.tag != "enemy")
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+        }
+
+        if (bulletLife >= 2 && gameObject.tag == "enemy")
+        {
+            Destroy(gameObject);
         }
 
         //locks y position
