@@ -236,9 +236,10 @@ public class Player : MonoBehaviour
                     death = true;
                     //play a player splat animation
                     //set a timer for transitioning to the game over screen
+                    playerAnimator.SetBool("isDead", true);
 
                     //for now because there is no death anim, just make character invisible
-                    playerRender.material.color = new Color(1f, 1f, 1f, 0f);
+                    //playerRender.material.color = new Color(1f, 1f, 1f, 0f);
                     Gun1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
                     Gun2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
                     Gun3.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
