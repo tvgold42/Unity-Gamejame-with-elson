@@ -62,7 +62,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
             //spawn the waves enemies
             if (enemiesToSpawn > 0 && timeBetweenSpawn <= 0)
             {
-                timeBetweenSpawn = 0.5f;
+                timeBetweenSpawn = 0.1f;
                 enemiesToSpawn -= 1;
 
                 enemiesSpawned += 1;
