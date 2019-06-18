@@ -28,6 +28,7 @@ public class HighScore : MonoBehaviour
     {
         timeToUpdate -= Time.deltaTime;
 
+
         if (SceneManager.GetActiveScene().name == "Victory")
         {
             highText.text = "Score: " + playerScore;

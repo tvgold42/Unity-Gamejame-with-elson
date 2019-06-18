@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyCounter : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class EnemyCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemiesToSpawn = 12;
+        enemiesToSpawn = 2;
         timeBetweenSpawn = 0.5f;
 
         enemyCount = 0;
@@ -56,17 +57,17 @@ public class EnemyCounter : MonoBehaviour
                 enemiesSpawned += 1;
 
                 //pick and spawn a random enemy
-             //   if (Random.Range(0, 100) >= 60)
-               // { Instantiate(enemy3HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-             //   if (Random.Range(0, 100) >= 30)
-               // { Instantiate(enemy2HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
+                if (Random.Range(0, 100) >= 60)
+                { Instantiate(enemy3HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
+                if (Random.Range(0, 100) >= 30)
+                { Instantiate(enemy2HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
                 if (Random.Range(0, 100) >= 20)
                 { Instantiate(enemyShoot, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-              //  if (Random.Range(0, 100) >= 60) //60
-              //  { Instantiate(whiteEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-             //   if (Random.Range(0, 100) >= 60) //60
-               // { Instantiate(blackEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-              //  else { Instantiate(enemy1HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
+                if (Random.Range(0, 100) >= 60) //60
+                { Instantiate(whiteEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
+               // if (Random.Range(0, 100) >= 60) //60
+              //  { Instantiate(blackEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
+                else { Instantiate(enemy1HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
             }
         }
 
@@ -90,12 +91,17 @@ public class EnemyCounter : MonoBehaviour
         {
             timeBetweenWaves -= Time.deltaTime;
         }
+
         if (waveComplete == true && timeBetweenWaves <= 0 && waveCount < 5)
         {
+            if(waveCount >= 3)
+            {
+                SceneManager.LoadScene("Victory", LoadSceneMode.Single);
+            }
             waveComplete = false;
             waveCount += 1;
             enemiesSpawned = 0;
-            enemiesToSpawn = 12 + (waveCount * 2);
+            enemiesToSpawn = 2 + (waveCount * 2);
         }
     }
 }
