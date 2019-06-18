@@ -72,7 +72,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
                 { Instantiate(enemy3HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); threeHPSpawned++;}
                 if (Random.Range(0, 100) >= 30 && twoHPToSpawn > twoHPSpawned)
                 { Instantiate(enemy2HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); twoHPSpawned++;}
-                if (Random.Range(0, 100) >= 80)
+                if (Random.Range(0, 100) >= 80 && shootersHPToSpawn > shootersSpawned)
                 { Instantiate(enemyShoot, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); shootersSpawned++;}
                 //if (Random.Range(0, 100) >= 60) //60
                 //{ Instantiate(whiteEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
