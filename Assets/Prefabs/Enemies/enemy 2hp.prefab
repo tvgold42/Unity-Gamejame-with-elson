@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2818802747742057710}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 1.910837, y: 1.910837, z: 1.910837}
+  m_LocalPosition: {x: 0, y: 0.02121, z: 0}
+  m_LocalScale: {x: 2.4711583, y: 2.4711583, z: 2.4711583}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -116,6 +116,7 @@ MonoBehaviour:
   newEnemyBullet: {fileID: 0}
   bulletTarget: {fileID: 0}
   shootCooldown: 5
+  dashCooldown: 10
 --- !u!65 &1766960739293193365
 BoxCollider:
   m_ObjectHideFlags: 0

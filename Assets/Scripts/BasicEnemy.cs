@@ -27,6 +27,9 @@ public class BasicEnemy : MonoBehaviour
     public GameObject newEnemyBullet;
     public Transform bulletTarget;
     public float shootCooldown = 5f;
+
+    //dashing towards player timer
+    public float dashCooldown = 10;
     
 
     void Start()
@@ -73,18 +76,27 @@ public class BasicEnemy : MonoBehaviour
         { transform.LookAt(playerPos.position * -1f, transform.up * -50000f);
           transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, 0);}
 
-      // // limiting max speed
-        //if (enemyRB.velocity.magnitude >= 4f && active == true)
-        //{ enemyRB.velocity = enemyRB.velocity.normalized; }
+        // limiting max speed
+        if (enemyRB.velocity.magnitude >= 20f && active == true)
+        { enemyRB.velocity = enemyRB.velocity.normalized; }
 
-        //countdown to shoot
+        //countdown to shoot/dash
         shootCooldown -= Time.deltaTime;
+        dashCooldown -= Time.deltaTime;
         //shooting
         if (shootCooldown <= 0 && enemyType == "enemyshoot")
         { newEnemyBullet = Instantiate(enemyBullet, transform.position, transform.rotation);
           Debug.Log("Bullet Fired at " + transform.position);
           newEnemyBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * -800);
           shootCooldown = 5f; }
+        //dashing
+        if (dashCooldown <= 0 && (enemyType == "enemy1hp" || enemyType == "enemy2hp" || enemyType == "enemy3hp"))
+        {
+            enemyRB.velocity = Vector3.zero;
+            Vector3 relativePos = GameObject.Find("player").transform.position - gameObject.transform.position;
+            enemyRB.AddForce(1f * relativePos * 300);
+            dashCooldown = 10f;
+        }
 
 
 

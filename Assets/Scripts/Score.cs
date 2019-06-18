@@ -20,6 +20,12 @@ public class Score : MonoBehaviour
     void Update()
     {
         privateScore += Time.deltaTime;
+
+        if (EnemyCounter.enemyCount <= 0 && EnemyCounter.waveComplete == true && EnemyCounter.waveCount == 3)
+        {
+            privateScore -= Time.deltaTime;
+        }
+
         privateScore = Math.Round(privateScore , 2);
         score = (float)privateScore;
         scoreText.text = "Time: " + privateScore.ToString();

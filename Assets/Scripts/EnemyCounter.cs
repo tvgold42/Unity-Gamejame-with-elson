@@ -16,7 +16,7 @@ public class EnemyCounter : MonoBehaviour
     public float timeBetweenSpawn;
 
     public float timeBetweenWaves;
-    public bool waveComplete = false;
+    public static bool waveComplete = false;
 
     //all enemy types
     public GameObject whiteEnemy1;
@@ -30,7 +30,7 @@ public class EnemyCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemiesToSpawn = 2;
+        enemiesToSpawn = 8;
         timeBetweenSpawn = 0.5f;
 
         enemyCount = 0;
@@ -101,7 +101,7 @@ public class EnemyCounter : MonoBehaviour
             waveComplete = false;
             waveCount += 1;
             enemiesSpawned = 0;
-            enemiesToSpawn = 2 + (waveCount * 2);
+            enemiesToSpawn = 8 + (waveCount * 2);
         }
     }
 }
