@@ -73,9 +73,9 @@ public class BasicEnemy : MonoBehaviour
         { transform.LookAt(playerPos.position * -1f, transform.up * -50000f);
           transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, 0);}
 
-       // limiting max speed
-        if (enemyRB.velocity.magnitude >= 4f && active == true)
-        { enemyRB.velocity = enemyRB.velocity.normalized; }
+      // // limiting max speed
+        //if (enemyRB.velocity.magnitude >= 4f && active == true)
+        //{ enemyRB.velocity = enemyRB.velocity.normalized; }
 
         //countdown to shoot
         shootCooldown -= Time.deltaTime;
@@ -114,7 +114,7 @@ public class BasicEnemy : MonoBehaviour
             {
                 //play hurt sound
                 enemySound.PlayOneShot(enemyDie, 1f);
-
+                GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().totalKilledSoFar++;
                 killed = true;
                 Debug.Log("killed enemy");
                 EnemyCounter.enemyCount -= 1;
