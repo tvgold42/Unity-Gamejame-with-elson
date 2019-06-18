@@ -7,8 +7,6 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
     public static float enemyCount = 0;
     public float publicEnemyCount = 0;
     public static float waveCount = 1;
-    public float enemiesToSpawn = 0;
-    public float enemiesSpawned = 0;
 
     public float levelWidth;
     public float levelHeight;
@@ -34,18 +32,16 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
     public int threeHPSpawned;
     public int shootersHPToSpawn;
     public int shootersSpawned;
-    
+    public bool finishedSpawning;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemiesToSpawn = 12;
         timeBetweenSpawn = 0.5f;
 
         enemyCount = 0;
         publicEnemyCount = 0;
         waveCount = 1;
-        enemiesSpawned = 0;
 
         
 
@@ -60,12 +56,9 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         if (waveComplete == false)
         {
             //spawn the waves enemies
-            if (enemiesToSpawn > 0 && timeBetweenSpawn <= 0)
+            if (timeBetweenSpawn <= 0)
             {
                 timeBetweenSpawn = 0.1f;
-                enemiesToSpawn -= 1;
-
-                enemiesSpawned += 1;
 
                 //pick and spawn a random enemy
                 if (Random.Range(0, 100) >= 60 && threeHPToSpawn > threeHPSpawned)
@@ -78,7 +71,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
                 //{ Instantiate(whiteEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
                 //if (Random.Range(0, 100) >= 60) //60
                 //{ Instantiate(blackEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-                if (oneHPToSpawn > oneHPSpawned) { Instantiate(enemy1HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
+                if (oneHPToSpawn > oneHPSpawned) { Instantiate(enemy1HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); oneHPSpawned++; }
             }
         }
 
@@ -86,7 +79,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
 
 
         //winning a wave
-        if (enemyCount <= 0 && enemiesToSpawn <= 0 && waveComplete == false)
+       /*  if (enemyCount <= 0 && enemiesToSpawn <= 0 && waveComplete == false)
         {
             Debug.Log("Wave Complete!!!");
             if (waveCount >= 5)
@@ -95,7 +88,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
             }
             waveComplete = true;
             timeBetweenWaves = 5f;
-        }
+        }*/
 
         //counting to next wave
         if (waveComplete == true && timeBetweenWaves >= 0 && waveCount < 5)
@@ -106,8 +99,6 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         {
             waveComplete = false;
             waveCount += 1;
-            enemiesSpawned = 0;
-            enemiesToSpawn = 12 + (waveCount * 2);
         }
     }
 }
