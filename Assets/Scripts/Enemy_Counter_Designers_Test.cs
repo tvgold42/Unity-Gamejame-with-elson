@@ -92,4 +92,10 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
+
+    public void spawnNewBadguy(GameObject nextBadGuy)
+    {
+         Instantiate(nextBadGuy, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation);
+         Instantiate(nextBadGuy, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation);
+    }
 }

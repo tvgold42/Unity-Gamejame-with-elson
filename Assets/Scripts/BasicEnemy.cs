@@ -137,13 +137,8 @@ public class BasicEnemy : MonoBehaviour
 
                 if (enemyType != "enemy1hp" )
                 {
-                    //spawn 2 1hp enemies then die
-                    newEnemy = Instantiate(nextEnemyToSpawn, transform.position, transform.rotation);
-                    newEnemy.transform.position += new Vector3(Random.Range(5f, -5f), 0, Random.Range(5f, -5f));
-
-                    newEnemy = Instantiate(nextEnemyToSpawn, transform.position, transform.rotation);
-                    newEnemy.transform.position += new Vector3(Random.Range(5f, -5), 0, Random.Range(5f, -5f));
-
+                    //spawn 2 of the next bad guys
+                    GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().spawnNewBadguy(nextEnemyToSpawn);
                     Destroy(gameObject);
                     Score.score += 300; 
 
