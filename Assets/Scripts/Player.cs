@@ -78,10 +78,10 @@ public class Player : MonoBehaviour
         fireCooldown = maxCooldown;
         newBullet = Instantiate(orangeBullet, Gun1.transform.position, Gun1.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        newBullet = Instantiate(orangeBullet, Gun2.transform.position, Gun2.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        newBullet = Instantiate(orangeBullet, Gun3.transform.position, Gun3.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
+        //newBullet = Instantiate(orangeBullet, Gun2.transform.position, Gun2.transform.rotation);
+        //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
+        //newBullet = Instantiate(orangeBullet, Gun3.transform.position, Gun3.transform.rotation);
+        //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
 
           orangeBulletsLeft--;
           purpleBulletsLeft++;
@@ -109,10 +109,10 @@ public class Player : MonoBehaviour
             fireCooldown = maxCooldown;
         newBullet = Instantiate(purpleBullet, Gun1.transform.position, Gun1.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        newBullet = Instantiate(purpleBullet, Gun2.transform.position, Gun2.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        newBullet = Instantiate(purpleBullet, Gun3.transform.position, Gun3.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
+        //newBullet = Instantiate(purpleBullet, Gun2.transform.position, Gun2.transform.rotation);
+        //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
+        //newBullet = Instantiate(purpleBullet, Gun3.transform.position, Gun3.transform.rotation);
+        //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
         purpleBulletsLeft--;
         orangeBulletsLeft++;
         purpleBulletsLeftSlider.size = purpleBulletsLeft / maxBullets;
