@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
 
         //shoot orange bullet
-        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(1)) && fireCooldown <= 0 && death == false && orangeBulletsLeft > 0)
+        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && orangeBulletsLeft > 0)
         { //spawn and move bullet;
 
             //play fire sound
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
         }
 
         //shoot purple bullet
-        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false  && purpleBulletsLeft > 0)
+        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(1)) && fireCooldown <= 0 && death == false  && purpleBulletsLeft > 0)
         {
             //play fire sound
             playerSound.PlayOneShot(shootSound, 1f);
