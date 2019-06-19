@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class Enemy_Counter_Designers_Test : MonoBehaviour
 {
     public static float enemyCount = 0;
     public float publicEnemyCount = 0;
     public static float waveCount = 1;
-
+    private Text badGuyLeft;
     public float levelWidth;
     public float levelHeight;
     public float timeBetweenSpawn;
@@ -34,8 +35,8 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        badGuyLeft = GameObject.Find("Bad Guys Left").GetComponent<Text>();
         timeBetweenSpawn = 0.5f;
-
         enemyCount = 0;
         publicEnemyCount = 0;
         waveCount = 1;
@@ -54,6 +55,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
     {
         publicEnemyCount = enemyCount;
         timeBetweenSpawn -= Time.deltaTime;
+        badGuyLeft.text = "Enemies left: " + (totalInWave - totalKilledSoFar);
         if (totalKilledSoFar== totalInWave)
         {
             Debug.Log("Wave Finished");
