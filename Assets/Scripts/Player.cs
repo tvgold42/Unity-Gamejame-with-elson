@@ -14,26 +14,22 @@ public class Player : MonoBehaviour
     public float fireCooldown;
     public float maxCooldown;
     public float invulnTimer;
-    public string fireMode = "white";
+    public string fireMode = "orange";
     public float deathTimer = 2;
     public Animator playerAnimator;
-
     public bool hurt = false;
     public bool death = false;
     public int playerHealth;
-    public GameObject whiteBullet;
-    public GameObject blackBullet;
+    public GameObject orangeBullet;
+    public GameObject purpleBullet;
     public GameObject newBullet;
-
-
-    //Option 1 and 2 are currently just used 
-    public GameObject option1;
-    public GameObject option2;
-
-    private Scrollbar whiteBulletsLeftSlider;
-    public float whiteBulletsLeft = 30;
+    private Scrollbar purpleBulletsLeftSlider;
+    private Scrollbar orangeBulletsLeftSlider;
+    private Scrollbar sliderMiddleImage;
+    public float orangeBulletsLeft;
+    public float purpleBulletsLeft;
     public GameObject AimingTarget;
-    public int maxBullets;
+    private float maxBullets;
     public GameObject GunHolder;
     public GameObject Gun1;
     public GameObject Gun2;
@@ -50,10 +46,19 @@ public class Player : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         playerSound = GetComponent<AudioSource>();
         playerHealth = 3;
-        whiteBulletsLeftSlider = GameObject.Find("bullet type remaining").GetComponent<Scrollbar>();
-        whiteBulletsLeftSlider.size = (whiteBulletsLeft / maxBullets);
+        purpleBulletsLeftSlider = GameObject.Find("purpleBuletsRemaining").GetComponent<Scrollbar>();
+        orangeBulletsLeftSlider = GameObject.Find("orangeBuletsRemaining").GetComponent<Scrollbar>();
+        sliderMiddleImage       = GameObject.Find("MiddleBulletsRemaining").GetComponent<Scrollbar>();
+        maxBullets = orangeBulletsLeft + purpleBulletsLeft;
+        purpleBulletsLeftSlider.size = (purpleBulletsLeft / maxBullets);
+        orangeBulletsLeftSlider.size = (orangeBulletsLeft / maxBullets);
+        sliderMiddleImage.value = (purpleBulletsLeft/maxBullets);
         playerAnimator = this.GetComponent<Animator>();
         screenSpaceHalfwayX = Screen.width / 2;
+        Debug.Log("Purple Bullets Left = " + purpleBulletsLeft);
+        Debug.Log("Orange Bullets Left = " + orangeBulletsLeft);
+        Debug.Log(purpleBulletsLeft + " + " + orangeBulletsLeft + " = " + maxBullets);
+        Debug.Log("orange bullets left slider value = " + orangeBulletsLeftSlider.size);
     }
 
     // Update is called once per frame
@@ -68,65 +73,72 @@ public class Player : MonoBehaviour
 
 
 
-        //shoot white bullet
-        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "white" && whiteBulletsLeft > 0)
+        //shoot orange bullet
+        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "orange" && orangeBulletsLeft > 0)
         { //spawn and move bullet;
 
             //play fire sound
             playerSound.PlayOneShot(shootSound, 1f);
 
         fireCooldown = maxCooldown;
-        newBullet = Instantiate(whiteBullet, Gun1.transform.position, Gun1.transform.rotation);
+        newBullet = Instantiate(orangeBullet, Gun1.transform.position, Gun1.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        newBullet = Instantiate(whiteBullet, Gun2.transform.position, Gun2.transform.rotation);
+        newBullet = Instantiate(orangeBullet, Gun2.transform.position, Gun2.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        newBullet = Instantiate(whiteBullet, Gun3.transform.position, Gun3.transform.rotation);
+        newBullet = Instantiate(orangeBullet, Gun3.transform.position, Gun3.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
 
-          whiteBulletsLeft--;
-          whiteBulletsLeftSlider.size = (whiteBulletsLeft / maxBullets);
+          orangeBulletsLeft--;
+          purpleBulletsLeft++;
+          purpleBulletsLeftSlider.size = (purpleBulletsLeft / maxBullets);
+          orangeBulletsLeftSlider.size = (orangeBulletsLeft / maxBullets);
+          sliderMiddleImage.value = (purpleBulletsLeft/maxBullets);
+
           
           ////do the same on the options
-          //newBullet = Instantiate(whiteBullet, option1.transform.position, option1.transform.rotation);
+          //newBullet = Instantiate(orangeBullet, option1.transform.position, option1.transform.rotation);
           //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
-          //newBullet = Instantiate(whiteBullet, option2.transform.position, option2.transform.rotation);
+          //newBullet = Instantiate(orangeBullet, option2.transform.position, option2.transform.rotation);
           //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
 
 
         }
 
-        //shoot black bullet
-        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "black" && whiteBulletsLeft < maxBullets)
+        //shoot purple bullet
+        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && fireMode == "purple" && purpleBulletsLeft > 0)
         {
             //play fire sound
             playerSound.PlayOneShot(shootSound, 1f);
             
             //spawn and move bullet;
             fireCooldown = maxCooldown;
-        newBullet = Instantiate(blackBullet, Gun1.transform.position, Gun1.transform.rotation);
+        newBullet = Instantiate(purpleBullet, Gun1.transform.position, Gun1.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        newBullet = Instantiate(blackBullet, Gun2.transform.position, Gun2.transform.rotation);
+        newBullet = Instantiate(purpleBullet, Gun2.transform.position, Gun2.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        newBullet = Instantiate(blackBullet, Gun3.transform.position, Gun3.transform.rotation);
+        newBullet = Instantiate(purpleBullet, Gun3.transform.position, Gun3.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        whiteBulletsLeft++;
-        whiteBulletsLeftSlider.size = whiteBulletsLeft / maxBullets;
+        purpleBulletsLeft--;
+        orangeBulletsLeft++;
+        purpleBulletsLeftSlider.size = purpleBulletsLeft / maxBullets;
+        orangeBulletsLeftSlider.size = (orangeBulletsLeft / maxBullets);
+        sliderMiddleImage.value = (purpleBulletsLeft/maxBullets);
 
             ////do the same on the options
-            //newBullet = Instantiate(blackBullet, option1.transform.position, option1.transform.rotation);
+            //newBullet = Instantiate(purpleBullet, option1.transform.position, option1.transform.rotation);
             //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
-            //newBullet = Instantiate(blackBullet, option2.transform.position, option2.transform.rotation);
+            //newBullet = Instantiate(purpleBullet, option2.transform.position, option2.transform.rotation);
             //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
         }
 
-        //change firing mode between white and black
+        //change firing mode between orange and purple
         if ((Input.GetKeyDown("e") || Input.GetKeyDown("x") || Input.GetMouseButtonDown(1)) && death == false)
-        {   if (fireMode == "white")
-            {fireMode = "black";
-             playerAnim.SetBool("White", false);}
-            else if (fireMode == "black")
-            {fireMode = "white";
-             playerAnim.SetBool("White", true);}
+        {   if (fireMode == "orange")
+            {fireMode = "purple";
+             playerAnim.SetBool("orange", false);}
+            else if (fireMode == "purple")
+            {fireMode = "orange";
+             playerAnim.SetBool("orange", true);}
         }
 
 
@@ -148,15 +160,15 @@ public class Player : MonoBehaviour
 
     public void switchBulletType()
     {
-        if (fireMode == "white")
+        if (fireMode == "orange")
         {
-            fireMode = "black";
-            playerAnim.SetBool("White", false);
+            fireMode = "purple";
+            playerAnim.SetBool("orange", false);
         }
-        else if (fireMode == "black")
+        else if (fireMode == "purple")
         {
-            fireMode = "white";
-            playerAnim.SetBool("White", true);
+            fireMode = "orange";
+            playerAnim.SetBool("orange", true);
         }
     }
 

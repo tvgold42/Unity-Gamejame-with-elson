@@ -16,21 +16,17 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
     public bool waveComplete = false;
 
     //all enemy types
-    public GameObject whiteEnemy1;
-    public GameObject blackEnemy1;
-    public GameObject enemy3HP;
-    public GameObject enemy2HP;
-    public GameObject enemy1HP;
+
+    public GameObject trogen;
+    public GameObject shooters;
+    public GameObject swarm;
 
     public GameObject enemyShoot;
-
-    public int oneHPToSpawn;
-    public int oneHPSpawned;
-    public int twoHPToSpawn;
-    public int twoHPSpawned;
-    public int threeHPToSpawn;
-    public int threeHPSpawned;
-    public int shootersHPToSpawn;
+    public int swarmToSpawn;
+    public int swarmSpawned;
+    public int trogenToSpawn;
+    public int trogenSpawned;
+    public int shootersToSpawn;
     public int shootersSpawned;
     public bool finishedSpawning;
     public int totalInWave;
@@ -50,7 +46,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
     void updateWaveTotal()
     {
         totalKilledSoFar = 0;
-        totalInWave = oneHPToSpawn + (twoHPToSpawn * 3) + (threeHPToSpawn * 7) + (shootersHPToSpawn * 3);
+        totalInWave = swarmToSpawn + (shootersToSpawn * 3) + (trogenToSpawn * 7);
     }
 
     // Update is called once per frame
@@ -72,17 +68,13 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
                 timeBetweenSpawn = 0.1f;
 
                 //pick and spawn a random enemy
-                if (Random.Range(0, 100) >= 60 && threeHPToSpawn > threeHPSpawned)
-                { Instantiate(enemy3HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); threeHPSpawned++;}
-                if (Random.Range(0, 100) >= 30 && twoHPToSpawn > twoHPSpawned)
-                { Instantiate(enemy2HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); twoHPSpawned++;}
-                if (Random.Range(0, 100) >= 80 && shootersHPToSpawn > shootersSpawned)
-                { Instantiate(enemyShoot, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); shootersSpawned++;}
-                //if (Random.Range(0, 100) >= 60) //60
-                //{ Instantiate(whiteEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-                //if (Random.Range(0, 100) >= 60) //60
-                //{ Instantiate(blackEnemy1, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
-                if (oneHPToSpawn > oneHPSpawned) { Instantiate(enemy1HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); oneHPSpawned++; }
+                if (Random.Range(0, 100) >= 60 && trogenToSpawn > trogenSpawned)
+                { Instantiate(trogen, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); trogenSpawned++;}
+                if (Random.Range(0, 100) >= 30 && shootersToSpawn > shootersSpawned)
+                { Instantiate(shooters, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); shootersSpawned++;}
+                if (swarmToSpawn > swarmSpawned)
+                { Instantiate(swarm, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); swarmSpawned++;}
+               
             }
         }
 

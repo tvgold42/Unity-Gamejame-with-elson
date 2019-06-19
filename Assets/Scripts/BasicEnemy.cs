@@ -21,6 +21,7 @@ public class BasicEnemy : MonoBehaviour
     //different enemies
     public GameObject enemy2HP;
     public GameObject enemy1HP;
+    public GameObject nextEnemyToSpawn;
     public GameObject newEnemy;
     //enemy bullet for shooter enemies
     public GameObject enemyBullet;
@@ -104,16 +105,16 @@ public class BasicEnemy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "whiteBullet" && enemyType == "enemyblack")
+        if (other.gameObject.tag == "purpleBullet" && this.gameObject.tag == "orangeEnemy")
         {
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.tag == "blackBullet" && enemyType == "enemywhite")
+        else if (other.gameObject.tag == "orangeBullet" && this.gameObject.tag == "purpleEnemy")
         {
             Destroy(other.gameObject);
         }
 
-        else if ((other.gameObject.tag == "whiteBullet" || other.gameObject.tag == "blackBullet") && killed == false)
+        else if ((other.gameObject.tag == "orangeBullet" || other.gameObject.tag == "purpleBullet" ) && killed == false)
         {
             //play hurt sound
             enemySound.PlayOneShot(enemyHurt, 1f);
@@ -134,30 +135,18 @@ public class BasicEnemy : MonoBehaviour
 
                 //check enemy type and act accordingly
 
-                if (enemyType == "enemy2hp" || enemyType == "enemyshoot")
+                if (enemyType != "enemy1hp" )
                 {
                     //spawn 2 1hp enemies then die
-                    newEnemy = Instantiate(enemy1HP, transform.position, transform.rotation);
-                    newEnemy.transform.position += new Vector3(Random.Range(1f, -1f), 0, Random.Range(1f, -1f));
+                    newEnemy = Instantiate(nextEnemyToSpawn, transform.position, transform.rotation);
+                    newEnemy.transform.position += new Vector3(Random.Range(5f, -5f), 0, Random.Range(5f, -5f));
 
-                    newEnemy = Instantiate(enemy1HP, transform.position, transform.rotation);
-                    newEnemy.transform.position += new Vector3(Random.Range(1f, -1), 0, Random.Range(1f, -1f));
-
-                    Destroy(gameObject);
-                    Score.score += 300;
-                }
-
-                if (enemyType == "enemy3hp")
-                {
-                    //spawn 2 2hp enemies then die
-                    newEnemy = Instantiate(enemy2HP, transform.position, transform.rotation);
-                    newEnemy.transform.position += new Vector3(Random.Range(1f, -1f), 0, Random.Range(1f, -1f));
-
-                    newEnemy = Instantiate(enemy2HP, transform.position, transform.rotation);
-                    newEnemy.transform.position += new Vector3(Random.Range(1f, -1f), 0, Random.Range(1f, -1f));
+                    newEnemy = Instantiate(nextEnemyToSpawn, transform.position, transform.rotation);
+                    newEnemy.transform.position += new Vector3(Random.Range(5f, -5), 0, Random.Range(5f, -5f));
 
                     Destroy(gameObject);
-                    Score.score += 500;
+                    Score.score += 300; 
+
                 }
 
                 else

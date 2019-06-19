@@ -6,10 +6,14 @@ TagManager:
   tags:
   - bound
   - enemy
-  - blackBullet
-  - whiteBullet
   - enemyWhite
   - enemyBlack
+  - orangeBullet
+  - purpleBullet
+  - whiteBullet
+  - blackBullet
+  - purpleEnemy
+  - orangeEnemy
   layers:
   - Default
   - TransparentFX
