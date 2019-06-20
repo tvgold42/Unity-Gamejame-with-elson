@@ -45,6 +45,9 @@ public class BasicEnemy : MonoBehaviour
         enemyRB.AddForce(Random.Range(100f, -100f), 0, Random.Range(100f, -100f));
         //target for bullet
         bulletTarget = GameObject.FindGameObjectWithTag("Player").transform;
+
+        //move left/right slightly so that enemies created via splitting dont get stuck in each other
+        transform.position = new Vector3(transform.position.x + Random.Range(-4f, 4f), transform.position.y, transform.position.z + Random.Range(-4f, 4f));
     }
 
     void Update()
@@ -127,7 +130,7 @@ public class BasicEnemy : MonoBehaviour
             {
                 //play hurt sound
                 enemySound.PlayOneShot(enemyDie, 1f);
-                GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().totalKilledSoFar++;
+               // GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().totalKilledSoFar++;
                 killed = true;
                 Debug.Log("killed enemy");
                 EnemyCounter.enemyCount -= 1;
@@ -138,7 +141,9 @@ public class BasicEnemy : MonoBehaviour
                 if (enemyType != "enemy1hp" )
                 {
                     //spawn 2 of the next bad guys
-                    GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().spawnNewBadguy(nextEnemyToSpawn);
+                    //  GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().spawnNewBadguy(nextEnemyToSpawn);
+                    Instantiate(nextEnemyToSpawn, transform.position, transform.rotation);
+                    Instantiate(nextEnemyToSpawn, transform.position, transform.rotation);
                     Destroy(gameObject);
                     Score.score += 300; 
 
@@ -146,9 +151,9 @@ public class BasicEnemy : MonoBehaviour
 
                 else
                 {
-                    Destroy(gameObject);
                     Score.score += 200;
-                    
+                    Destroy(gameObject);
+   
                 }
             }
         }

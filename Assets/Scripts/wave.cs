@@ -19,6 +19,13 @@ public class Wave : MonoBehaviour
     void Update()
     {
         privatewave = wave;
-        waveText.text = "Wave: " + EnemyCounter.waveCount;
+        if (gameObject.name == "Wave Counter")
+        {
+            waveText.text = "Wave: " + EnemyCounter.waveCount;
+        }
+        if (gameObject.name == "Bad Guys Left")
+        {
+            waveText.text = "Enemies Left: " + EnemyCounter.enemyCount;
+        }
     }
 }

@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     private Scrollbar sliderMiddleImage;
     public float orangeBulletsLeft;
     public float purpleBulletsLeft;
+    public static float pubOrangeBulletsLeft;
+    public static float pubPurpleBulletsLeft;
     public GameObject AimingTarget;
     private float maxBullets;
     public GameObject GunHolder;
@@ -59,7 +61,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //make public and non public ammo counts the same
+        pubOrangeBulletsLeft = orangeBulletsLeft;
+        pubPurpleBulletsLeft = purpleBulletsLeft;
        //input for moving/firing
        forwardInput = Input.GetAxis("Vertical");
        turnInput = Input.GetAxis("Horizontal");

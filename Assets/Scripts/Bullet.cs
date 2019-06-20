@@ -7,6 +7,20 @@ public class Bullet : MonoBehaviour
     public float bulletLife;
     public float totalBulletLife;
 
+    void Start()
+    {
+        
+        if (gameObject.tag == "orangeBullet")
+        {
+            totalBulletLife += (Player.pubOrangeBulletsLeft / 40) - 0.07f;
+            
+        }
+        if (gameObject.tag == "purpleBullet")
+        {
+            totalBulletLife += (Player.pubPurpleBulletsLeft / 40) - 0.07f;
+        }
+        
+    }
     // Update is called once per frame
     void Update()
     {
@@ -28,5 +42,13 @@ public class Bullet : MonoBehaviour
 
     }
 
+    void OnCollisionEnter(Collision other)
+    {
+        //make enemy bullets not bounce against everything
+        if (gameObject.tag == "enemy" &&  other.gameObject.name != "enemyShoot(Clone)")
+        {
+            Destroy(gameObject);
+        }
+    }
 
 }

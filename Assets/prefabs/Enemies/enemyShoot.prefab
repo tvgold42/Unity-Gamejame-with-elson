@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5198607784513836636}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: -0.020784, z: 0}
+  m_LocalScale: {x: 2.6080801, y: 2.6080801, z: 2.6080801}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,8 +111,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2926803, y: 1.2527846, z: 0.93237764}
-  m_Center: {x: -0.022903904, y: -0.12860751, z: -0.053029593}
+  m_Size: {x: 1.1792486, y: 1.0691502, z: 0.9323776}
+  m_Center: {x: 0.021220386, y: -0.03679029, z: -0.053029574}
 --- !u!114 &1323640120328515405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +255,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5198607784513836636}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 63e6f2c7ca0b9bf4794ac424d1541a40, type: 2}
   m_CullingMode: 0
