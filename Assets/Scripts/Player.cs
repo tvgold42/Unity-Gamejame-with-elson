@@ -16,7 +16,6 @@ public class Player : MonoBehaviour
     public float invulnTimer;
     public string fireMode = "orange";
     public float deathTimer = 2;
-    public Animator playerAnimator;
     public bool hurt = false;
     public bool death = false;
     public int playerHealth;
@@ -40,6 +39,7 @@ public class Player : MonoBehaviour
     public AudioClip shootSound;
     public AudioClip dieSound;
     private int screenSpaceHalfwayX;
+
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
@@ -47,23 +47,19 @@ public class Player : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         playerSound = GetComponent<AudioSource>();
         playerHealth = 3;
-        purpleBulletsLeftSlider = GameObject.Find("purpleBuletsRemaining").GetComponent<Scrollbar>();
-        orangeBulletsLeftSlider = GameObject.Find("orangeBuletsRemaining").GetComponent<Scrollbar>();
-        sliderMiddleImage       = GameObject.Find("MiddleBulletsRemaining").GetComponent<Scrollbar>();
-        maxBullets = orangeBulletsLeft + purpleBulletsLeft;
-        purpleBulletsLeftSlider.size = (purpleBulletsLeft / maxBullets);
-        orangeBulletsLeftSlider.size = (orangeBulletsLeft / maxBullets);
-        sliderMiddleImage.value = (purpleBulletsLeft/maxBullets);
-        playerAnimator = this.GetComponent<Animator>();
+       // purpleBulletsLeftSlider = GameObject.Find("purpleBuletsRemaining").GetComponent<Scrollbar>();
+       // orangeBulletsLeftSlider = GameObject.Find("orangeBuletsRemaining").GetComponent<Scrollbar>();
+       // sliderMiddleImage       = GameObject.Find("MiddleBulletsRemaining").GetComponent<Scrollbar>();
+      //  maxBullets = orangeBulletsLeft + purpleBulletsLeft;
+       // purpleBulletsLeftSlider.size = (purpleBulletsLeft / maxBullets);
+        //orangeBulletsLeftSlider.size = (orangeBulletsLeft / maxBullets);
+      //  sliderMiddleImage.value = (purpleBulletsLeft/maxBullets);
         screenSpaceHalfwayX = Screen.width / 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //make public and non public ammo counts the same
-        pubOrangeBulletsLeft = orangeBulletsLeft;
-        pubPurpleBulletsLeft = purpleBulletsLeft;
        //input for moving/firing
        forwardInput = Input.GetAxis("Vertical");
        turnInput = Input.GetAxis("Horizontal");
@@ -71,7 +67,7 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Euler(-90, 0, 0);
 
 
-
+        /*
         //shoot orange bullet
         if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && orangeBulletsLeft > 0)
         { //spawn and move bullet;
@@ -102,26 +98,22 @@ public class Player : MonoBehaviour
 
 
         }
+    */
 
         //shoot purple bullet
-        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(1)) && fireCooldown <= 0 && death == false  && purpleBulletsLeft > 0)
+        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false)
         {
-            //play fire sound
-            playerSound.PlayOneShot(shootSound, 1f);
+        //play fire sound
+        playerSound.PlayOneShot(shootSound, 1f);
             
-            //spawn and move bullet;
-            fireCooldown = maxCooldown;
+        //spawn and move bullet;
+        fireCooldown = maxCooldown;
         newBullet = Instantiate(purpleBullet, Gun1.transform.position, Gun1.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
         //newBullet = Instantiate(purpleBullet, Gun2.transform.position, Gun2.transform.rotation);
         //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
         //newBullet = Instantiate(purpleBullet, Gun3.transform.position, Gun3.transform.rotation);
         //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        purpleBulletsLeft--;
-        orangeBulletsLeft++;
-        purpleBulletsLeftSlider.size = purpleBulletsLeft / maxBullets;
-        orangeBulletsLeftSlider.size = (orangeBulletsLeft / maxBullets);
-        sliderMiddleImage.value = (purpleBulletsLeft/maxBullets);
         }
 
 
@@ -138,20 +130,6 @@ public class Player : MonoBehaviour
 
         
        
-    }
-
-    public void switchBulletType()
-    {
-        if (fireMode == "orange")
-        {
-            fireMode = "purple";
-            playerAnim.SetBool("orange", false);
-        }
-        else if (fireMode == "purple")
-        {
-            fireMode = "orange";
-            playerAnim.SetBool("orange", true);
-        }
     }
 
     void FixedUpdate()
@@ -188,11 +166,11 @@ public class Player : MonoBehaviour
         GunHolder.transform.LookAt(AimingTarget.transform);
         if (mousePos.x > screenSpaceHalfwayX)
         {
-            playerAnimator.SetBool("isLookingLeft", true);
+            playerAnim.SetBool("isLookingLeft", true);
         }
         else
         {
-            playerAnimator.SetBool("isLookingLeft", false);
+            playerAnim.SetBool("isLookingLeft", false);
         }
     }
 
@@ -227,7 +205,7 @@ public class Player : MonoBehaviour
                     death = true;
                     //play a player splat animation
                     //set a timer for transitioning to the game over screen
-                    playerAnimator.SetBool("isDead", true);
+                    playerAnim.SetBool("isDead", true);
 
                     //for now because there is no death anim, just make character invisible
                     //playerRender.material.color = new Color(1f, 1f, 1f, 0f);

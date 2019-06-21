@@ -108,16 +108,7 @@ public class BasicEnemy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "purpleBullet" && this.gameObject.tag == "orangeEnemy")
-        {
-            Destroy(other.gameObject);
-        }
-        else if (other.gameObject.tag == "orangeBullet" && this.gameObject.tag == "purpleEnemy")
-        {
-            Destroy(other.gameObject);
-        }
-
-        else if ((other.gameObject.tag == "orangeBullet" || other.gameObject.tag == "purpleBullet" ) && killed == false)
+        if (other.gameObject.tag == "purpleBullet" && killed == false)
         {
             //play hurt sound
             enemySound.PlayOneShot(enemyHurt, 1f);
