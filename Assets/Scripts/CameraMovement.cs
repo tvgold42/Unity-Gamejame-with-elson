@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
     public Transform playerPosition;
     public Transform myPosition;
 
-    public Rigidbody myRB;
+    public static Rigidbody myRB;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,9 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         myRB.freezeRotation = true;
-        myPosition.position = playerPosition.position;
+        if (Player.death == false)
+        {
+            myPosition.position = playerPosition.position;
+        }
     }
 }

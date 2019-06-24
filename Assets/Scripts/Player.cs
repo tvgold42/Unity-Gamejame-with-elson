@@ -17,20 +17,16 @@ public class Player : MonoBehaviour
     public string fireMode = "orange";
     public float deathTimer = 2;
     public bool hurt = false;
-    public bool death = false;
-    public int playerHealth;
+    public static bool death = false;
+    public int playerHealth = 3;
     public GameObject orangeBullet;
     public GameObject purpleBullet;
     public GameObject newBullet;
-    private Scrollbar purpleBulletsLeftSlider;
-    private Scrollbar orangeBulletsLeftSlider;
-    private Scrollbar sliderMiddleImage;
     public float orangeBulletsLeft;
     public float purpleBulletsLeft;
     public static float pubOrangeBulletsLeft;
     public static float pubPurpleBulletsLeft;
     public GameObject AimingTarget;
-    private float maxBullets;
     public GameObject GunHolder;
     public GameObject Gun1;
     public GameObject Gun2;
@@ -47,6 +43,7 @@ public class Player : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         playerSound = GetComponent<AudioSource>();
         playerHealth = 3;
+        death = false;
        // purpleBulletsLeftSlider = GameObject.Find("purpleBuletsRemaining").GetComponent<Scrollbar>();
        // orangeBulletsLeftSlider = GameObject.Find("orangeBuletsRemaining").GetComponent<Scrollbar>();
        // sliderMiddleImage       = GameObject.Find("MiddleBulletsRemaining").GetComponent<Scrollbar>();
@@ -203,10 +200,13 @@ public class Player : MonoBehaviour
             if (playerHealth <= 0)
                 {
                     death = true;
+                    //move camera forward
+                    CameraMovement.myRB.AddForce(0, -2000, 0);
                     //play a player splat animation
                     //set a timer for transitioning to the game over screen
                     playerAnim.SetBool("isDead", true);
-
+                    playerRender.material.color = new Color(1f, 1f, 1f, 1f);
+                    playerRB.velocity = Vector3.zero;
                     //for now because there is no death anim, just make character invisible
                     //playerRender.material.color = new Color(1f, 1f, 1f, 0f);
                     Gun1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);

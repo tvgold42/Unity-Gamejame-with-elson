@@ -13,15 +13,15 @@ public class RecordTable : MonoBehaviour
         recordText = GetComponent<Text>();
         if (gameObject.name == "Record1")
         {
-            recordText.text = HighScore.highScore1.ToString();
+            recordText.text = "1. " + HighScore.highScore1.ToString();
         }
         if (gameObject.name == "Record2")
         {
-            recordText.text = HighScore.highScore2.ToString();
+            recordText.text = "2. " + HighScore.highScore2.ToString();
         }
         if (gameObject.name == "Record3")
         {
-            recordText.text = HighScore.highScore3.ToString();
+            recordText.text = "3. " + HighScore.highScore3.ToString();
         }
     }
 

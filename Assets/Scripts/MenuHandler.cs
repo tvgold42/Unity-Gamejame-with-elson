@@ -7,14 +7,32 @@ using UnityEngine.UI;
 public class MenuHandler : MonoBehaviour
 {
     public Button menuButton;
-    
+    public AudioSource menuAudio;
+    public static bool AudioBegin = false;
+
+
+    void Awake()
+    {
+        if ( gameObject.name == "AudioHandler")
+        {
+            menuAudio = GetComponent<AudioSource>();
+        }
+        if (AudioBegin == false && gameObject.name == "AudioHandler")
+        {
+            menuAudio.Play();
+            AudioBegin = true;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneManager.GetActiveScene().name != "Title")
+        if (gameObject.name != "logo" && gameObject.name != "AudioHandler")
         {
             menuButton.onClick.AddListener(MenuButtonFunction);//adds a listener for when you click the button
         }
+
+
     }
 
     // Update is called once per frame
@@ -27,6 +45,12 @@ public class MenuHandler : MonoBehaviour
 
             
         }
+
+        if (SceneManager.GetActiveScene().name == "Level1")
+        {
+            AudioBegin = false;
+            menuAudio.Stop();
+        }
     }
 
     void MenuButtonFunction()
@@ -34,6 +58,10 @@ public class MenuHandler : MonoBehaviour
         if(menuButton.name == "Start")
         {
             SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+        }
+        if (menuButton.name == "Play")
+        {
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
         if (menuButton.name == "HighScore")
         {

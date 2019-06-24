@@ -12,11 +12,13 @@ public class BasicEnemy : MonoBehaviour
     public AudioSource enemySound;
     public AudioClip enemyHurt;
     public AudioClip enemyDie;
+    public Animator enemyAnim;
     public string enemyType;
     public float enemyHealth;
     public float enemyColorChange;
     public static bool active = false;
     public bool killed;
+    public float deathTime = 0;
 
     //different enemies
     public GameObject enemy2HP;
@@ -40,6 +42,7 @@ public class BasicEnemy : MonoBehaviour
         enemyTransform = GetComponent<Transform>();
         enemyRender = GetComponent<SpriteRenderer>();
         enemySound = GetComponent<AudioSource>();
+        enemyAnim = GetComponent<Animator>();
         fullScale = enemyTransform.localScale;
         enemyTransform.localScale = new Vector3(0, 0, 0);
         enemyRB.AddForce(Random.Range(100f, -100f), 0, Random.Range(100f, -100f));
@@ -52,17 +55,42 @@ public class BasicEnemy : MonoBehaviour
 
     void Update()
     {
+        if (killed == true)
+        {
+            enemyRB.detectCollisions = false;
+            deathTime += Time.deltaTime;
+        }
+        if (deathTime >= 0.4f)
+        {
+            Destroy(gameObject);
+        }
+        //stop moving if player is dead
+        if(Player.death == true)
+        {
+            enemyRB.velocity = Vector3.zero;
+        }
         //flash color when hit
         enemyColorChange -= Time.deltaTime;
         if (enemyColorChange <= 0)
         { enemyRender.material.color = Color.white; }
 
+        //flip sprite depending on where player is
+        /*
+        if (transform.position.x >= playerPos.position.x && transform.localScale.x >= 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
+        if (transform.position.x <= playerPos.position.x && transform.localScale.x <= 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
+        */
         //grow to full size after spawning
-        if (enemyTransform.localScale.x < fullScale.x)
+        if (enemyTransform.localScale.y < fullScale.y)
         { enemyTransform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
           enemyRB.detectCollisions = false; }
 
-        if (enemyTransform.localScale.x >= fullScale.x)
+        if (enemyTransform.localScale.y >= fullScale.y)
         { active = true;
           enemyRB.detectCollisions = true;}
 
@@ -112,7 +140,7 @@ public class BasicEnemy : MonoBehaviour
         {
             //play hurt sound
             enemySound.PlayOneShot(enemyHurt, 1f);
-
+            enemyAnim.SetBool("HasTakenDamage", true);
             enemyHealth -= 1;
             enemyRender.material.color = Color.cyan;
             enemyColorChange = 0.07f;
@@ -125,7 +153,10 @@ public class BasicEnemy : MonoBehaviour
                 killed = true;
                 Debug.Log("killed enemy");
                 EnemyCounter.enemyCount -= 1;
+                enemyAnim.SetBool("IsDead", true);
                 Destroy(other.gameObject);
+                enemyRB.velocity = Vector3.zero;
+
 
                 //check enemy type and act accordingly
 
@@ -135,7 +166,7 @@ public class BasicEnemy : MonoBehaviour
                     //  GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().spawnNewBadguy(nextEnemyToSpawn);
                     Instantiate(nextEnemyToSpawn, transform.position, transform.rotation);
                     Instantiate(nextEnemyToSpawn, transform.position, transform.rotation);
-                    Destroy(gameObject);
+                   // Destroy(gameObject);
                     Score.score += 300; 
 
                 }
@@ -143,7 +174,7 @@ public class BasicEnemy : MonoBehaviour
                 else
                 {
                     Score.score += 200;
-                    Destroy(gameObject);
+                    //Destroy(gameObject);
    
                 }
             }

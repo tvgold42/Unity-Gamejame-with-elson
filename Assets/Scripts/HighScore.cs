@@ -31,7 +31,7 @@ public class HighScore : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Victory")
         {
-            highText.text = "Score: " + playerScore;
+            highText.text = "Time: " + playerScore;
 
             if (timeToUpdate <= 0 && updateRecords == false)
             {

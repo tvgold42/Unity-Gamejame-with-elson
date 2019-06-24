@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TitleCell : MonoBehaviour
 {
-    public float startPosition = 30;
-    public float endPosition = -30;
+    public float startPosition = 50;
+    public float endPosition = -50;
     public Rigidbody cellRB;
     public Transform cellPos;
     public SpriteRenderer cellSprite;
@@ -16,10 +16,12 @@ public class TitleCell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startPosition = 50;
+        endPosition = -50;
         cellRB = GetComponent<Rigidbody>();
         cellPos = GetComponent<Transform>();
         cellSprite = GetComponent<SpriteRenderer>();
-        cellPos.position = new Vector3(transform.position.x, Random.Range(-5, 5), Random.Range(5, 20));
+        cellPos.position = new Vector3(transform.position.x, Random.Range(-5, 5), Random.Range(20, 30));
         cellRB.AddForce(Random.Range(-400,-600), 0, 0);
 
         if (Random.Range(0,100) >= 70)
@@ -41,7 +43,7 @@ public class TitleCell : MonoBehaviour
     {
         if (cellPos.position.x <= endPosition)
         {
-            cellPos.position = new Vector3(startPosition, Random.Range(-5, 5), Random.Range(5, 20));
+            cellPos.position = new Vector3(startPosition, Random.Range(-5, 5), Random.Range(20, 30));
 
             if (Random.Range(0, 100) >= 50)
             {
