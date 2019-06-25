@@ -42,6 +42,9 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         waveCount = 1;
         updateWaveTotal();
         Debug.Log("you are currently on level " + SceneManager.GetActiveScene().name);
+        swarmToSpawn = 25;
+        shootersToSpawn = 15;
+        trogenToSpawn = 0;
     }
     
     void updateWaveTotal()
@@ -67,7 +70,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
             //spawn the waves enemies
             if (timeBetweenSpawn <= 0)
             {
-                timeBetweenSpawn = 0.1f;
+                timeBetweenSpawn = 0.5f;
 
                 //pick and spawn a random enemy
                 if (Random.Range(0, 100) >= 60 && trogenToSpawn > trogenSpawned)
@@ -89,8 +92,32 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         {
             waveComplete = false;
             waveCount += 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            resetSpawnedCounter();
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+        if (waveCount == 2)
+        {
+            swarmToSpawn = 25;
+            shootersToSpawn = 15;
+            trogenToSpawn = 5;
+            totalInWave = swarmToSpawn + (shootersToSpawn * 3) + (trogenToSpawn * 7);
+        }
+        else if (waveCount == 3)
+        {
+            swarmToSpawn = 25;
+            shootersToSpawn = 15;
+            trogenToSpawn = 10;
+            totalInWave = swarmToSpawn + (shootersToSpawn * 3) + (trogenToSpawn * 7);
+        }
+        else if (waveCount > 3) { SceneManager.LoadScene("Victory"); }
+    }
+
+    void resetSpawnedCounter()
+    {
+        swarmToSpawn = 0;
+        shootersSpawned = 0;
+        trogenSpawned = 0;
+        totalKilledSoFar = 0;
     }
 
     public void spawnNewBadguy(GameObject nextBadGuy)

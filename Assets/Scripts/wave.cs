@@ -23,10 +23,10 @@ public class Wave : MonoBehaviour
         {
             waveText.text = "Wave: " + EnemyCounter.waveCount;
         }
-        if (gameObject.name == "Bad Guys Left")
-        {
-            waveText.text = "Enemies Left: " + EnemyCounter.enemyCount;
-        }
+        //if (gameObject.name == "Bad Guys Left")
+        //{
+        //    waveText.text = "Enemies Left: " + EnemyCounter.enemyCount;
+        //}
         if (gameObject.name == "Health")
         {
             waveText.text = "Health: " + Player.playerHealth;

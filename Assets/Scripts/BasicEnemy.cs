@@ -149,7 +149,7 @@ public class BasicEnemy : MonoBehaviour
             {
                 //play hurt sound
                 enemySound.PlayOneShot(enemyDie, 1f);
-               // GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().totalKilledSoFar++;
+                GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().totalKilledSoFar++;
                 killed = true;
                 Debug.Log("killed enemy");
                 EnemyCounter.enemyCount -= 1;
