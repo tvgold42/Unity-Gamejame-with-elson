@@ -8,8 +8,8 @@ public class HighScore : MonoBehaviour
 {
     public static float playerScore;
 
-    public static float highScore1 = 99999;
-    public static float highScore2 = 99999;
+    public static float highScore1 = 99997;
+    public static float highScore2 = 99998;
     public static float highScore3 = 99999;
     public float timeToUpdate = 0.5f;
     public bool updateRecords = false;

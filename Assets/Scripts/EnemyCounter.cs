@@ -30,7 +30,7 @@ public class EnemyCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemiesToSpawn = 5;
+        enemiesToSpawn = 40;
         timeBetweenSpawn = 0.5f;
 
         enemyCount = 0;
@@ -57,7 +57,7 @@ public class EnemyCounter : MonoBehaviour
                 
 
                 //pick and spawn a random enemy
-                if (Random.Range(0, 100) >= 50)
+                if (Random.Range(0, 100) >= 50 && waveCount > 1)
                 { Instantiate(enemy3HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); enemiesSpawned += 1; }
                // if (Random.Range(0, 100) >= 30)
               //  { Instantiate(enemy2HP, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); }
@@ -101,7 +101,7 @@ public class EnemyCounter : MonoBehaviour
             waveComplete = false;
             waveCount += 1;
             enemiesSpawned = 0;
-            enemiesToSpawn = 1 + (waveCount * 2);
+            enemiesToSpawn = 40 + (waveCount * 10);
         }
     }
 }

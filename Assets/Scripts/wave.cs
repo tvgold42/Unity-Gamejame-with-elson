@@ -27,5 +27,9 @@ public class Wave : MonoBehaviour
         {
             waveText.text = "Enemies Left: " + EnemyCounter.enemyCount;
         }
+        if (gameObject.name == "Health")
+        {
+            waveText.text = "Health: " + Player.playerHealth;
+        }
     }
 }

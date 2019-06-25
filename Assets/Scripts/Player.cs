@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public float deathTimer = 2;
     public bool hurt = false;
     public static bool death = false;
-    public int playerHealth = 3;
+    public static int playerHealth = 3;
     public GameObject orangeBullet;
     public GameObject purpleBullet;
     public GameObject newBullet;
