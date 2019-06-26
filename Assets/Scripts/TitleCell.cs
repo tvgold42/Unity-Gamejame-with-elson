@@ -21,7 +21,7 @@ public class TitleCell : MonoBehaviour
         cellRB = GetComponent<Rigidbody>();
         cellPos = GetComponent<Transform>();
         cellSprite = GetComponent<SpriteRenderer>();
-        cellPos.position = new Vector3(transform.position.x, Random.Range(-5, 5), Random.Range(20, 30));
+        cellPos.position = new Vector3(transform.position.x, Random.Range(-19, 20), Random.Range(20, 30));
         cellRB.AddForce(Random.Range(-400,-600), 0, 0);
 
         if (Random.Range(0,100) >= 70)

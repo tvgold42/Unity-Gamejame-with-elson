@@ -12,7 +12,6 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
     public float levelWidth;
     public float levelHeight;
     public float timeBetweenSpawn;
-
     public float timeBetweenWaves;
     public bool waveComplete = false;
     public bool processedWaveComplete = false;
@@ -35,6 +34,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
     public bool finishedSpawning;
     public int totalInWave;
     public int totalKilledSoFar;
+    private Player playerScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,8 +70,9 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         {
             Debug.Log("Wave Finished");
             waveComplete = true;
-            timeBetweenWaves = 20;
+            timeBetweenWaves = 5;
             processedWaveComplete = true;
+            Player.playerHealth = 3;
         }
         if (waveComplete == false)
         {
@@ -82,11 +83,11 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
 
                 //pick and spawn a random enemy
                 if (Random.Range(0, 100) >= 60 && trogenToSpawn > trogenSpawned)
-                { Instantiate(trogen, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); trogenSpawned++;}
+                { Instantiate(trogen, new Vector3(Random.Range(levelWidth, -levelWidth), -4f, Random.Range(levelHeight, -levelHeight)), transform.rotation); trogenSpawned++;}
                 if (Random.Range(0, 100) >= 30 && shootersToSpawn > shootersSpawned)
-                { Instantiate(shooters, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); shootersSpawned++;}
+                { Instantiate(shooters, new Vector3(Random.Range(levelWidth, -levelWidth), -4f, Random.Range(levelHeight, -levelHeight)), transform.rotation); shootersSpawned++;}
                 if (swarmToSpawn > swarmSpawned)
-                { Instantiate(swarm, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation); swarmSpawned++;}
+                { Instantiate(swarm, new Vector3(Random.Range(levelWidth, -levelWidth), -4f, Random.Range(levelHeight, -levelHeight)), transform.rotation); swarmSpawned++;}
                
             }
         }
