@@ -7,7 +7,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
 {
     public static float enemyCount = 0;
     public float publicEnemyCount = 0;
-    public static float waveCount = 1;
+    public float waveCount = 1;
     private Text badGuyLeft;
     public float levelWidth;
     public float levelHeight;
@@ -15,6 +15,9 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
 
     public float timeBetweenWaves;
     public bool waveComplete = false;
+    public bool processedWaveComplete = false;
+    public bool designersTestingStuff;
+    public float desingersTestingStuffWaveStart;
 
     //all enemy types
 
@@ -42,9 +45,14 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         waveCount = 1;
         updateWaveTotal();
         Debug.Log("you are currently on level " + SceneManager.GetActiveScene().name);
-        swarmToSpawn = 25;
-        shootersToSpawn = 15;
+
+        if (!designersTestingStuff)
+        {
+        swarmToSpawn = 12;
+        shootersToSpawn = 8;
         trogenToSpawn = 0;
+        }
+        updateWaveTotal();
     }
     
     void updateWaveTotal()
@@ -58,12 +66,12 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
     {
         publicEnemyCount = enemyCount;
         timeBetweenSpawn -= Time.deltaTime;
-        badGuyLeft.text = "Enemies left: " + (totalInWave - totalKilledSoFar);
-        if (totalKilledSoFar== totalInWave)
+        if (totalKilledSoFar == totalInWave && processedWaveComplete == false)
         {
             Debug.Log("Wave Finished");
             waveComplete = true;
-
+            timeBetweenWaves = 20;
+            processedWaveComplete = true;
         }
         if (waveComplete == false)
         {
@@ -92,24 +100,28 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         {
             waveComplete = false;
             waveCount += 1;
+            processedWaveComplete = false;
+
             resetSpawnedCounter();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (waveCount == 2)
+            {
+                swarmToSpawn = 12;
+                shootersToSpawn = 9;
+                trogenToSpawn = 3;
+                updateWaveTotal();
+            }
+            else if (waveCount == 3)
+            {
+                swarmToSpawn = 12;
+                shootersToSpawn = 8;
+                trogenToSpawn = 5;
+                updateWaveTotal();
+
+            }
+            else if (waveCount > 3) { SceneManager.LoadScene("Victory"); }
         }
-        if (waveCount == 2)
-        {
-            swarmToSpawn = 25;
-            shootersToSpawn = 15;
-            trogenToSpawn = 5;
-            totalInWave = swarmToSpawn + (shootersToSpawn * 3) + (trogenToSpawn * 7);
-        }
-        else if (waveCount == 3)
-        {
-            swarmToSpawn = 25;
-            shootersToSpawn = 15;
-            trogenToSpawn = 10;
-            totalInWave = swarmToSpawn + (shootersToSpawn * 3) + (trogenToSpawn * 7);
-        }
-        else if (waveCount > 3) { SceneManager.LoadScene("Victory"); }
+      
     }
 
     void resetSpawnedCounter()
@@ -120,9 +132,11 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
         totalKilledSoFar = 0;
     }
 
-    public void spawnNewBadguy(GameObject nextBadGuy)
+    public void badGuyDied()
     {
-         Instantiate(nextBadGuy, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation);
-         Instantiate(nextBadGuy, new Vector3(Random.Range(levelWidth, -levelWidth), 0, Random.Range(levelHeight, -levelHeight)), transform.rotation);
+        totalKilledSoFar++;
+        Debug.Log("BadGuy Killed, there are " + (totalInWave - totalKilledSoFar) + " left");
+        badGuyLeft.text = "Enemies left: " + (totalInWave - totalKilledSoFar);
+
     }
 }

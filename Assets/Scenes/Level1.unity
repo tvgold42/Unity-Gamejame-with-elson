@@ -904,7 +904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -551, y: 241}
+  m_AnchoredPosition: {x: -551, y: 268}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &513241286
@@ -916,7 +916,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 513241284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd769308b8d66446a4431aab13d3d1b, type: 3}
+  m_Script: {fileID: 11500000, guid: e90ba77389af9894e86e5f0be7725538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waveText: {fileID: 0}
@@ -2861,7 +2861,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -551, y: 329.22995}
+  m_AnchoredPosition: {x: -551, y: -242}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1504311181
@@ -2873,7 +2873,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1504311179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd769308b8d66446a4431aab13d3d1b, type: 3}
+  m_Script: {fileID: 11500000, guid: e90ba77389af9894e86e5f0be7725538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waveText: {fileID: 0}
@@ -3349,7 +3349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -551, y: 376}
+  m_AnchoredPosition: {x: -551, y: 328}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2052481850
@@ -3484,22 +3484,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   publicEnemyCount: 0
+  waveCount: 1
   levelWidth: 26.26
   levelHeight: 24.5
   timeBetweenSpawn: 0
   timeBetweenWaves: 0
   waveComplete: 0
+  designersTestingStuff: 1
+  desingersTestingStuffWaveStart: 0
   trogen: {fileID: 7057169620007405925, guid: 45385f502484d7749b4963eaf5aaf619, type: 3}
   shooters: {fileID: 5198607784513836636, guid: 9d9ec5ce7d440da48a52d0701783d41c,
     type: 3}
   swarm: {fileID: 3125050798306817744, guid: bc3a09701c17176489e86517691c9bb8, type: 3}
   enemyShoot: {fileID: 5198607784513836636, guid: 9d9ec5ce7d440da48a52d0701783d41c,
     type: 3}
-  swarmToSpawn: 25
+  swarmToSpawn: 0
   swarmSpawned: 0
-  trogenToSpawn: 0
+  trogenToSpawn: 1
   trogenSpawned: 0
-  shootersToSpawn: 15
+  shootersToSpawn: 0
   shootersSpawned: 0
   finishedSpawning: 0
   totalInWave: 0
@@ -3539,7 +3542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -551, y: 286.31995}
+  m_AnchoredPosition: {x: -551, y: -302.7701}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2076007525
@@ -3551,7 +3554,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2076007523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd769308b8d66446a4431aab13d3d1b, type: 3}
+  m_Script: {fileID: 11500000, guid: e90ba77389af9894e86e5f0be7725538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waveText: {fileID: 0}
