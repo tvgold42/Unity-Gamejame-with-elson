@@ -3485,8 +3485,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   publicEnemyCount: 0
   waveCount: 1
-  levelWidth: 26.26
-  levelHeight: 24.5
+  levelWidth: 20
+  levelHeight: 20
   timeBetweenSpawn: 0
   timeBetweenWaves: 0
   waveComplete: 0
@@ -4373,6 +4373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491924667419618063, guid: c8b6f0a0d91d8bc4f800d2a749fb3e83,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8b6f0a0d91d8bc4f800d2a749fb3e83, type: 3}
