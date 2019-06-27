@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 43a5145efa6798e43a6477c962d80dc1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc31a6d642f2f6b44af46c1c6526738a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,16 +102,24 @@ MonoBehaviour:
   turnInput: 0
   acceleration: 50
   fireCooldown: 0
+  maxCooldown: 0
   invulnTimer: 0
   fireMode: white
+  deathTimer: 2
   hurt: 0
-  death: 0
-  playerHealth: 0
-  whiteBullet: {fileID: 0}
-  blackBullet: {fileID: 0}
+  orangeBullet: {fileID: 0}
+  purpleBullet: {fileID: 0}
   newBullet: {fileID: 0}
-  option1: {fileID: 0}
-  option2: {fileID: 0}
+  orangeBulletsLeft: 0
+  purpleBulletsLeft: 0
+  AimingTarget: {fileID: 0}
+  GunHolder: {fileID: 0}
+  Gun1: {fileID: 0}
+  Gun2: {fileID: 0}
+  Gun3: {fileID: 0}
+  playerSound: {fileID: 0}
+  shootSound: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!54 &6491924667419618056
 Rigidbody:
   m_ObjectHideFlags: 0
