@@ -24,7 +24,8 @@ public class MenuHandler : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    // Start is called before the first frame update
+
+
     void Start()
     {
         if (gameObject.name != "logo" && gameObject.name != "AudioHandler")
@@ -35,15 +36,12 @@ public class MenuHandler : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetKeyDown("space") && SceneManager.GetActiveScene().name == "Title")
         {
-            //will later have a fade out effect
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-
-            
         }
 
         if (SceneManager.GetActiveScene().name == "Level1")
@@ -55,6 +53,8 @@ public class MenuHandler : MonoBehaviour
 
     void MenuButtonFunction()
     {
+        //go to scene depending on what button clicked
+
         if(menuButton.name == "Start")
         {
             SceneManager.LoadScene("Level1", LoadSceneMode.Single);

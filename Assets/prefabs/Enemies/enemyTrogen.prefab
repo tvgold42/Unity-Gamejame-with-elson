@@ -105,10 +105,12 @@ MonoBehaviour:
   enemySound: {fileID: 0}
   enemyHurt: {fileID: 8300000, guid: 2465017a20370a14284166e983742e0b, type: 3}
   enemyDie: {fileID: 8300000, guid: 114c80145ce9f17479e224292e322c84, type: 3}
+  enemyAnim: {fileID: 0}
   enemyType: enemy3hp
   enemyHealth: 8
   enemyColorChange: 0
   killed: 0
+  deathTime: 0
   enemy2HP: {fileID: 2818802747742057710, guid: 0f354f3dbbe21454fb1e02bd0a2ce280,
     type: 3}
   enemy1HP: {fileID: 3125050798306817744, guid: bc3a09701c17176489e86517691c9bb8,

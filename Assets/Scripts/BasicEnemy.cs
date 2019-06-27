@@ -37,7 +37,7 @@ public class BasicEnemy : MonoBehaviour
 
     void Start()
     {
-        EnemyCounter.enemyCount += 1;
+        //EnemyCounter.enemyCount += 1;
         enemyRB = GetComponent<Rigidbody>();
         enemyTransform = GetComponent<Transform>();
         enemyRender = GetComponent<SpriteRenderer>();
@@ -45,7 +45,6 @@ public class BasicEnemy : MonoBehaviour
         enemyAnim = GetComponent<Animator>();
         fullScale = enemyTransform.localScale;
         enemyTransform.localScale = new Vector3(0, 0, 0);
-        enemyRB.AddForce(Random.Range(100f, -100f), 0, Random.Range(100f, -100f));
         //target for bullet
         bulletTarget = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -55,11 +54,14 @@ public class BasicEnemy : MonoBehaviour
 
     void Update()
     {
+        //disable collision if dead
         if (killed == true)
         {
             enemyRB.detectCollisions = false;
             deathTime += Time.deltaTime;
         }
+
+        //give time for enemy death animtion to play before destroying object
         if (deathTime >= 0.4f)
         {
             Destroy(gameObject);
@@ -74,17 +76,16 @@ public class BasicEnemy : MonoBehaviour
         if (enemyColorChange <= 0)
         { enemyRender.material.color = Color.white; }
 
-        //flip sprite depending on where player is
-        /*
-        if (transform.position.x >= playerPos.position.x && transform.localScale.x >= 0)
+        //enemy sprite changing direction faced
+        if (transform.position.x >= playerPos.position.x && enemyRender.flipX == false)
         {
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            enemyRender.flipX = true;
         }
-        if (transform.position.x <= playerPos.position.x && transform.localScale.x <= 0)
+        if (transform.position.x <= playerPos.position.x && enemyRender.flipX == true)
         {
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            enemyRender.flipX = false;
         }
-        */
+
         //grow to full size after spawning
         if (enemyTransform.localScale.y < fullScale.y)
         { enemyTransform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
@@ -138,7 +139,7 @@ public class BasicEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "purpleBullet" && killed == false)
         {
-            //play hurt sound
+            //play hurt sound and make enemy flash colour
             enemySound.PlayOneShot(enemyHurt, 1f);
             enemyAnim.SetBool("HasTakenDamage", true);
             enemyHealth -= 1;
@@ -147,35 +148,23 @@ public class BasicEnemy : MonoBehaviour
 
             if (enemyHealth <= 0)
             {
-                //play hurt sound
+                //play hurt sound, set death animations
                 enemySound.PlayOneShot(enemyDie, 1f);
                 GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().badGuyDied();
                 killed = true;
                 Debug.Log("killed enemy");
-                EnemyCounter.enemyCount -= 1;
+                //EnemyCounter.enemyCount -= 1;
                 enemyAnim.SetBool("IsDead", true);
                 Destroy(other.gameObject);
                 enemyRB.velocity = Vector3.zero;
 
 
                 //check enemy type and act accordingly
-
                 if (enemyType != "enemy1hp" )
                 {
                     //spawn 2 of the next bad guys
-                    //  GameObject.Find("EnemySpawnHandler").GetComponent<Enemy_Counter_Designers_Test>().spawnNewBadguy(nextEnemyToSpawn);
                     Instantiate(nextEnemyToSpawn, transform.position, transform.rotation);
                     Instantiate(nextEnemyToSpawn, transform.position, transform.rotation);
-                   // Destroy(gameObject);
-                    Score.score += 300; 
-
-                }
-
-                else
-                {
-                    Score.score += 200;
-                    //Destroy(gameObject);
-   
                 }
             }
         }

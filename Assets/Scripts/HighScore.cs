@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class HighScore : MonoBehaviour
 {
     public static float playerScore;
-
+    //default best times are really high so they can be beat
     public static float highScore1 = 99997;
     public static float highScore2 = 99998;
     public static float highScore3 = 99999;
@@ -16,14 +16,12 @@ public class HighScore : MonoBehaviour
 
     public Text highText;
 
-    // Start is called before the first frame update
     void Start()
     {
         highText = GetComponent<Text>();
         Load();
     }
 
-    // Update is called once per frame
     void Update()
     {
         timeToUpdate -= Time.deltaTime;

@@ -14,23 +14,15 @@ public class Player : MonoBehaviour
     public float fireCooldown;
     public float maxCooldown;
     public float invulnTimer;
-    public string fireMode = "orange";
     public float deathTimer = 2;
     public bool hurt = false;
     public static bool death = false;
     public static int playerHealth = 3;
-    public GameObject orangeBullet;
     public GameObject purpleBullet;
     public GameObject newBullet;
-    public float orangeBulletsLeft;
-    public float purpleBulletsLeft;
-    public static float pubOrangeBulletsLeft;
-    public static float pubPurpleBulletsLeft;
     public GameObject AimingTarget;
     public GameObject GunHolder;
     public GameObject Gun1;
-    public GameObject Gun2;
-    public GameObject Gun3;
     public AudioSource playerSound;
     public AudioClip shootSound;
     public AudioClip dieSound;
@@ -44,58 +36,18 @@ public class Player : MonoBehaviour
         playerSound = GetComponent<AudioSource>();
         playerHealth = 3;
         death = false;
-       // purpleBulletsLeftSlider = GameObject.Find("purpleBuletsRemaining").GetComponent<Scrollbar>();
-       // orangeBulletsLeftSlider = GameObject.Find("orangeBuletsRemaining").GetComponent<Scrollbar>();
-       // sliderMiddleImage       = GameObject.Find("MiddleBulletsRemaining").GetComponent<Scrollbar>();
-      //  maxBullets = orangeBulletsLeft + purpleBulletsLeft;
-       // purpleBulletsLeftSlider.size = (purpleBulletsLeft / maxBullets);
-        //orangeBulletsLeftSlider.size = (orangeBulletsLeft / maxBullets);
-      //  sliderMiddleImage.value = (purpleBulletsLeft/maxBullets);
+        //screenspace is used to detect whether the mouse is left or right to the character
+        //so the character faces the right direction
         screenSpaceHalfwayX = Screen.width / 2;
     }
 
-    // Update is called once per frame
     void Update()
     {
        //input for moving/firing
        forwardInput = Input.GetAxis("Vertical");
        turnInput = Input.GetAxis("Horizontal");
-        //lock rotation
-        transform.rotation = Quaternion.Euler(-90, 0, 0);
-
-
-        /*
-        //shoot orange bullet
-        if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false && orangeBulletsLeft > 0)
-        { //spawn and move bullet;
-
-            //play fire sound
-            playerSound.PlayOneShot(shootSound, 1f);
-
-        fireCooldown = maxCooldown;
-        newBullet = Instantiate(orangeBullet, Gun1.transform.position, Gun1.transform.rotation);
-        newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        //newBullet = Instantiate(orangeBullet, Gun2.transform.position, Gun2.transform.rotation);
-        //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        //newBullet = Instantiate(orangeBullet, Gun3.transform.position, Gun3.transform.rotation);
-        //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-
-          orangeBulletsLeft--;
-          purpleBulletsLeft++;
-          purpleBulletsLeftSlider.size = (purpleBulletsLeft / maxBullets);
-          orangeBulletsLeftSlider.size = (orangeBulletsLeft / maxBullets);
-          sliderMiddleImage.value = (purpleBulletsLeft/maxBullets);
-
-          
-          ////do the same on the options
-          //newBullet = Instantiate(orangeBullet, option1.transform.position, option1.transform.rotation);
-          //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
-          //newBullet = Instantiate(orangeBullet, option2.transform.position, option2.transform.rotation);
-          //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.up * 2000);
-
-
-        }
-    */
+       //lock rotation
+       transform.rotation = Quaternion.Euler(-90, 0, 0);
 
         //shoot purple bullet
         if ((Input.GetKey("z") || Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && fireCooldown <= 0 && death == false)
@@ -107,13 +59,7 @@ public class Player : MonoBehaviour
         fireCooldown = maxCooldown;
         newBullet = Instantiate(purpleBullet, Gun1.transform.position, Gun1.transform.rotation);
         newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        //newBullet = Instantiate(purpleBullet, Gun2.transform.position, Gun2.transform.rotation);
-        //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
-        //newBullet = Instantiate(purpleBullet, Gun3.transform.position, Gun3.transform.rotation);
-        //newBullet.GetComponent<Rigidbody>().AddRelativeForce(Vector2.down * 2500);
         }
-
-
 
         //firing cooldown
         if (fireCooldown >= 0)
@@ -124,9 +70,6 @@ public class Player : MonoBehaviour
         { hurt = false;
           playerRender.material.color = new Color(1f, 1f, 1f, 1f);
         }
-
-        
-       
     }
 
     void FixedUpdate()
@@ -154,12 +97,8 @@ public class Player : MonoBehaviour
 
         mousePos.x = Input.mousePosition.x;
         mousePos.y = Input.mousePosition.y;
-        
-
         AimingTarget.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
-
-        //Debug.Log("mouse pos = " + mousePos);
-
+        //gun aim at mouse
         GunHolder.transform.LookAt(AimingTarget.transform);
         if (mousePos.x > screenSpaceHalfwayX)
         {
@@ -171,11 +110,9 @@ public class Player : MonoBehaviour
         }
     }
 
-
     void OnCollisionEnter(Collision other)
     {
         //for boucning off the edges of the stage
-        //will work once we add a 3d ring
         if (other.gameObject.tag == "bound")
         { playerRB.velocity *= -1f;
           transform.rotation = Quaternion.Euler(-90, 0, transform.rotation.z + 180);
@@ -192,8 +129,6 @@ public class Player : MonoBehaviour
                 invulnTimer = 2;
                 playerHealth -= 1;
                 playerRender.material.color = new Color(1f, 1f, 1f, 0.5f);
-                //option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
-                //option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
                 playerRB.velocity *= -3;
                 Debug.Log("damage!!!");
             //check if health 0;
@@ -207,15 +142,8 @@ public class Player : MonoBehaviour
                     playerAnim.SetBool("isDead", true);
                     playerRender.material.color = new Color(1f, 1f, 1f, 1f);
                     playerRB.velocity = Vector3.zero;
-                    //for now because there is no death anim, just make character invisible
-                    //playerRender.material.color = new Color(1f, 1f, 1f, 0f);
                     Gun1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
-                    Gun2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
-                    Gun3.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
-
-                //option1.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
-                //option2.GetComponent<SpriteRenderer>().material.color = new Color(1f, 1f, 1f, 0f);
-                Debug.Log("lose!!!");
+                    Debug.Log("lose!!!");
 
             }
         }
