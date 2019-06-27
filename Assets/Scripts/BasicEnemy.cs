@@ -101,7 +101,7 @@ public class BasicEnemy : MonoBehaviour
           transform.rotation = Quaternion.Euler(-90, 0, transform.rotation.z); }
 
         //lock y position
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        transform.position = new Vector3(transform.position.x,-4, transform.position.z);
 
         //make shooter enemies aim towards player
         if (enemyType == "enemyshoot")

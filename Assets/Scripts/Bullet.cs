@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         }
 
         //locks y position
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        transform.position = new Vector3(transform.position.x, -4, transform.position.z);
 
 
     }

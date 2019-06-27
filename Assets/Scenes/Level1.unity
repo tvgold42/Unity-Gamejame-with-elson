@@ -3484,14 +3484,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   publicEnemyCount: 0
-  waveCount: 1
+  waveCount: 3
   levelWidth: 26.26
   levelHeight: 24.5
   timeBetweenSpawn: 0
   timeBetweenWaves: 0
   waveComplete: 0
   processedWaveComplete: 0
-  designersTestingStuff: 1
+  designersTestingStuff: 0
   desingersTestingStuffWaveStart: 0
   trogen: {fileID: 7057169620007405925, guid: 45385f502484d7749b4963eaf5aaf619, type: 3}
   shooters: {fileID: 5198607784513836636, guid: 9d9ec5ce7d440da48a52d0701783d41c,
