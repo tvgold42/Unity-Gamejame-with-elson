@@ -102,7 +102,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
             waveComplete = false;
             waveCount += 1;
             processedWaveComplete = false;
-
+            timeBetweenSpawn = 1;
             resetSpawnedCounter();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             if (waveCount == 2)
@@ -127,7 +127,7 @@ public class Enemy_Counter_Designers_Test : MonoBehaviour
 
     void resetSpawnedCounter()
     {
-        swarmToSpawn = 0;
+        swarmSpawned = 0;
         shootersSpawned = 0;
         trogenSpawned = 0;
         totalKilledSoFar = 0;

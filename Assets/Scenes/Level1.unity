@@ -3484,7 +3484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   publicEnemyCount: 0
-  waveCount: 3
+  waveCount: 1
   levelWidth: 26.26
   levelHeight: 24.5
   timeBetweenSpawn: 0
